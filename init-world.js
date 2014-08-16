@@ -9,6 +9,10 @@ var initRunTime = new Date();
 		world.RenderUnits();
 	}
 
+	function uppendLine(string){
+		loadingContainer.innerText += "[" + (new Date() - initRunTime) + "]\t" + string + "\n";
+	}
+
 	var canvas_height = 500;
 	var canvas_width = 800;
 	
@@ -19,33 +23,33 @@ var initRunTime = new Date();
 	
 	var world = new World(canvas, 5000, 5000);
 
-	var horseman = new Unit("horseman", 3);
+	var horseman = new Unit("horseman", 0); // 3 = direction
 
 	horseman.x = 200;
 	horseman.y = 200;
 
-	world.units.push(horseman); // 3 = direction
+	world.units.push(horseman); 
 
-	for(var i=0;i<sprites.length; i++){
+	for(var i = 0; i < sprites.length; i++){
 		
 	var unit_state = new UnitState(sprites[i].UnitName, sprites[i].SpriteHeight, sprites[i].SpriteWidth, sprites[i].NumberOfFrames);
 
 	horseman.states.push(unit_state);
 	}
 
-	//	document.addEventListener("keydown",keyDownHandler, false);	
-	//	document.addEventListener("keyup",keyUpHandler, false);
+	var loadingContainer = document.getElementById("loading-container");
 
 	var imageLoader = new IM(world, function(){ 
-		//when loading finished;
-
-		console.log("Loading finished in " + (new Date() - initRunTime));
+		
+		uppendLine("Loading finished in ");
 
 		return gameLoop(); 
+	}, function(a,b){
+		uppendLine( (b/a * 100 + "").substring(0,6) + " %");
 	});
 	
 	for(var i = 0; i < sprites.length; i++){
-		imageLoader.add('sprites_png/'+sprites[i].UnitName+'.png', sprites[i].UnitName);
+		imageLoader.add('sprites_png/'+ sprites[i].UnitName + '.png', sprites[i].UnitName);
 	}
 
 	return world;

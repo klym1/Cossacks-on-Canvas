@@ -38,8 +38,8 @@ function World(canvas, width, height) {
 	var sy = spriteHeight * state.j;
 
 	//Optional. The width of the clipped image
-	var swidth = spriteWidth;
-	var sheight = spriteHeight;
+	//var swidth = spriteWidth;
+	//var sheight = spriteHeight;
 
 	//Optional. The width/height of the image to use (stretch or reduce the image)
 	var width = spriteWidth;
@@ -47,7 +47,7 @@ function World(canvas, width, height) {
 
 	var image = this._resources[state.spriteName];
 
-	this.ctx.drawImage(image, sx, sy, swidth, sheight, unit.x, unit.y, width, height);
+	this.ctx.drawImage(image, sx, sy, width, height, unit.x, unit.y, width, height);
 
 	}
 	}

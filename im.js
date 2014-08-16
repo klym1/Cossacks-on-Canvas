@@ -1,6 +1,6 @@
 "use strict";
 
-function IM(world, loading_completed_callback){
+function IM(world, loading_completed_callback, update_callback){
             this.store =  world._resources;
             this.imagesAdded = 0;
             this.imagesLoaded = 0;
@@ -9,6 +9,7 @@ function IM(world, loading_completed_callback){
                 var image = new Image();
                 image.onload = function() {
                     self.imagesLoaded++;
+                    update_callback(self.imagesAdded, self.imagesLoaded);
                     if (self.imagesAdded == self.imagesLoaded) {
                         console.log('Images loaded');
                         loading_completed_callback();

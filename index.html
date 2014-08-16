@@ -15,11 +15,20 @@
         margin: 0;
         padding: 0;  
     }
+
+    #loading-container {
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        font-size: 11px;
+        font-family: Verdana;
+    }
     </style>
     <body>
         <div id="coinTapGameContainer">
             <canvas id="can"></canvas>
         </div>
+        <h1 id = "loading-container"></h1>
         <script src="sprites_png\sprites-info.json"></script>
 		<script src="im.js"></script>
         <script src="World.js"></script>
@@ -27,5 +36,7 @@
         <script src="UnitState.js"></script>
         <script src="animationLoop.js"></script>
         <script src="init-world.js"></script>
+
+        
     </body>
 </html>
