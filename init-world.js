@@ -10,7 +10,15 @@ var initRunTime = new Date();
 	}
 
 	function uppendLine(string){
-		document.getElementById("loading-container").innerHTML += "[" + (new Date() - initRunTime) + "]\t" + string + "<p>";
+
+		var difference = new Date() - initRunTime;
+		
+		var 
+    	minutes = Math.floor(difference % 36e5 / 60000),
+    	seconds = Math.floor(difference % 60000 / 1000),
+    	milliseconds = Math.floor(difference % 1000);
+
+		document.getElementById("loading-container").innerHTML += "[" + minutes + ':' + seconds + '.' + milliseconds+ "] " + string + "<p>";
 	}
 
 	var canvas_height = 500;
