@@ -11,7 +11,6 @@ function IM(world, loading_completed_callback, update_callback){
                     self.imagesLoaded++;
                     update_callback(self.imagesAdded, self.imagesLoaded);
                     if (self.imagesAdded == self.imagesLoaded) {
-                        console.log('Images loaded');
                         loading_completed_callback();
                     }
                 }

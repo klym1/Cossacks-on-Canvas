@@ -17,37 +17,37 @@ function World(canvas, width, height) {
 	this.units.push(unit);
 }
 
+	var unit, 
+	state, 
+	spriteWidth, 
+	spriteHeight,
+	sx,
+	sy,
+	image,
+	i;
+
   this.RenderUnits = function() {
 
 	this.ctx.clearRect(0, 0, this.canvas_width , this.canvas_height);
 
-	for (var i = this.units.length - 1; i >= 0; i--) 
+	for (i = this.units.length - 1; i >= 0; i--) 
 	{
 		
-	var unit = this.units[i];
-	var state = unit.states[unit.activeState];
+	unit = this.units[i];
+	state = unit.states[unit.activeState];
 
-	var spriteWidth = state.spriteWidth;
-	var spriteHeight = state.spriteHeight;
+	spriteWidth = state.spriteWidth;
+	spriteHeight = state.spriteHeight;
 
 	state.j++;
 	state.j %= state.k;
 
-	//Optional. The x coordinate where to start clipping
-	var sx = spriteWidth * unit.n;
-	var sy = spriteHeight * state.j;
+	sx = spriteWidth * unit.n;
+	sy = spriteHeight * state.j;
 
-	//Optional. The width of the clipped image
-	//var swidth = spriteWidth;
-	//var sheight = spriteHeight;
+	image = this._resources[state.spriteName];
 
-	//Optional. The width/height of the image to use (stretch or reduce the image)
-	var width = spriteWidth;
-	var height = spriteHeight;
-
-	var image = this._resources[state.spriteName];
-
-	this.ctx.drawImage(image, sx, sy, width, height, unit.x, unit.y, width, height);
+	this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
 
 	}
 	}

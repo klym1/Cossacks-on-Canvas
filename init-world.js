@@ -10,7 +10,7 @@ var initRunTime = new Date();
 	}
 
 	function uppendLine(string){
-		loadingContainer.innerText += "[" + (new Date() - initRunTime) + "]\t" + string + "\n";
+		document.getElementById("loading-container").innerText += "[" + (new Date() - initRunTime) + "]\t" + string + "\n";
 	}
 
 	var canvas_height = 500;
@@ -23,7 +23,7 @@ var initRunTime = new Date();
 	
 	var world = new World(canvas, 5000, 5000);
 
-	var horseman = new Unit("horseman", 4); // 3 = direction
+	var horseman = new Unit("horseman");
 
 	horseman.x = 200;
 	horseman.y = 200;
@@ -36,9 +36,7 @@ var initRunTime = new Date();
 
 	horseman.states.push(unit_state);
 	}
-
-	var loadingContainer = document.getElementById("loading-container");
-
+	
 	var imageLoader = new IM(world, function(){ 
 		
 		uppendLine("Loading finished in ");
