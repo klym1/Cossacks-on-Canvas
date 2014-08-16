@@ -25,34 +25,29 @@ function World(canvas, width, height) {
 	{
 		
 	var unit = this.units[i];
+	var state = unit.states[unit.activeState];
 
-	var spriteWidth = unit.spriteWidth;
-	var spriteHeight = unit.spriteHeight;
+	var spriteWidth = state.spriteWidth;
+	var spriteHeight = state.spriteHeight;
 
-	unit.j++;
-	unit.j %= unit.k;
+	state.j++;
+	state.j %= state.k;
 
 	//Optional. The x coordinate where to start clipping
 	var sx = spriteWidth * unit.n;
-	var sy = spriteHeight * unit.j;
+	var sy = spriteHeight * state.j;
 
 	//Optional. The width of the clipped image
 	var swidth = spriteWidth;
 	var sheight = spriteHeight;
 
-	//where to place the image on the canvas
-	//x = 
-	//y = 
-
 	//Optional. The width/height of the image to use (stretch or reduce the image)
 	var width = spriteWidth;
 	var height = spriteHeight;
 
-	var image = this._resources[unit.name];
+	var image = this._resources[state.spriteName];
 
 	this.ctx.drawImage(image, sx, sy, swidth, sheight, unit.x, unit.y, width, height);
-
-	//this.ctx.fillRect(unit.x, unit.y,100,100);
 
 	}
 	}

@@ -10,7 +10,7 @@ var initRunTime = new Date();
 	}
 
 	var canvas_height = 500;
-	var canvas_width = 1000;
+	var canvas_width = 800;
 	
 	// Get canvas
 	var canvas = document.getElementById("can");
@@ -19,16 +19,18 @@ var initRunTime = new Date();
 	
 	var world = new World(canvas, 5000, 5000);
 
-	var horseman;
+	var horseman = new Unit("horseman", 3);
+
+	horseman.x = 200;
+	horseman.y = 200;
+
+	world.units.push(horseman); // 3 = direction
 
 	for(var i=0;i<sprites.length; i++){
-	
-		horseman = new Unit(sprites[i].UnitName, sprites[i].SpriteHeight, sprites[i].SpriteWidth, 3, sprites[i].NumberOfFrames);
+		
+	var unit_state = new UnitState(sprites[i].UnitName, sprites[i].SpriteHeight, sprites[i].SpriteWidth, sprites[i].NumberOfFrames);
 
-		horseman.x = i * 100;
-		horseman.y = 200;
-
-		world.units.push(horseman);
+	horseman.states.push(unit_state);
 	}
 
 	//	document.addEventListener("keydown",keyDownHandler, false);	
