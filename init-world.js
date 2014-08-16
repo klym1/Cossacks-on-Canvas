@@ -10,7 +10,7 @@ var initRunTime = new Date();
 	}
 
 	function uppendLine(string){
-		document.getElementById("loading-container").innerText += "[" + (new Date() - initRunTime) + "]\t" + string + "\n";
+		document.getElementById("loading-container").innerHTML += "[" + (new Date() - initRunTime) + "]\t" + string + "<p>";
 	}
 
 	var canvas_height = 500;

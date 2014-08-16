@@ -6,5 +6,5 @@ function UnitState(spriteName, spriteHeight, spriteWidth, k){
 
   this.j = 0;       //current sprite frame offset index
   
-  this.k = k || 15; // number of frames
+  this.k = k; // number of frames
 };
