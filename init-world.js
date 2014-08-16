@@ -23,7 +23,7 @@ var initRunTime = new Date();
 	
 	var world = new World(canvas, 5000, 5000);
 
-	var horseman = new Unit("horseman", 0); // 3 = direction
+	var horseman = new Unit("horseman", 4); // 3 = direction
 
 	horseman.x = 200;
 	horseman.y = 200;
