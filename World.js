@@ -11,11 +11,11 @@ function World(canvas, width, height) {
   this._resources = {};
 
   this.AddUnits = function(unit) {
-	if(this.units == null) throw "Unit list is null";
-	if(unit == null) throw "Unit is null";
+	if(this.units === null) throw "Unit list is null";
+	if(unit === null) throw "Unit is null";
 
 	this.units.push(unit);
-}
+  };
 
 	var unit, 
 	state, 
@@ -50,6 +50,5 @@ function World(canvas, width, height) {
 	this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
 
 	}
-	}
+	};
 }
-

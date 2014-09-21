@@ -13,10 +13,10 @@ function IM(world, loading_completed_callback, update_callback){
                     if (self.imagesAdded == self.imagesLoaded) {
                         loading_completed_callback();
                     }
-                }
+                };
                 image.src = url;
                 this.store[name] = image;
                 this.imagesAdded++;
-            }
-        };
+            };
+        }
       

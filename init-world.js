@@ -10,7 +10,7 @@ var initRunTime = new Date();
 	}
 
 	function uppendLine(string){
-
+		
 		var difference = new Date() - initRunTime;
 		
 		var 
