@@ -9,7 +9,7 @@ function World(canvas, width, height) {
   this.canvas_height = this.canvas.height;
   this.canvas_width = this.canvas.width;
   this._resources = {};
-
+  
   this.AddUnits = function(unit) {
 	if(this.units === null) throw "Unit list is null";
 	if(unit === null) throw "Unit is null";
@@ -34,14 +34,18 @@ function World(canvas, width, height) {
 	{
 		
 	unit = this.units[i];
+	unit.tick();
+
 	state = unit.states[unit.activeState];
 
 	spriteWidth = state.spriteWidth;
 	spriteHeight = state.spriteHeight;
 
+if(unit.activeState > 0)
+{
 	state.j++;
 	state.j %= state.k;
-
+}
 	sx = spriteWidth * unit.n;
 	sy = spriteHeight * state.j;
 

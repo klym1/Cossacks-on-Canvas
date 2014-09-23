@@ -5,12 +5,16 @@ var world = (function () {
 var initRunTime = new Date();
 
 	function gameLoop () {
-		window.requestAnimationFrame(gameLoop);
+
+	setTimeout(gameLoop, 50);
+
+	//	mover.
+		//window.requestAnimationFrame(gameLoop);
 		world.RenderUnits();
 	}
 
 	function uppendLine(string){
-		
+
 		var difference = new Date() - initRunTime;
 		
 		var 
@@ -18,7 +22,7 @@ var initRunTime = new Date();
     	seconds = Math.floor(difference % 60000 / 1000),
     	milliseconds = Math.floor(difference % 1000);
 
-		document.getElementById("loading-container").innerHTML += "[" + minutes + ':' + seconds + '.' + milliseconds+ "] " + string + "<p>";
+		document.getElementById("loading-container").innerHTML += "[" + minutes + ":" + seconds + "." + milliseconds+ "] " + string + "<p>";
 	}
 
 	var canvas_height = 500;
@@ -62,3 +66,4 @@ var initRunTime = new Date();
 
 } ());
 
+var unit = world.units[0];
