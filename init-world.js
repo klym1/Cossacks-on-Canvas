@@ -6,7 +6,7 @@ var initRunTime = new Date();
 
 	function gameLoop () {
 
-	setTimeout(gameLoop, 50);
+	setTimeout(gameLoop, 100);
 
 	//	mover.
 		//window.requestAnimationFrame(gameLoop);

@@ -18,7 +18,6 @@ function Unit(name){
   this.tick = function(){
 
   	console.log("tick");
-  	console.log("Commands: " + this.commands.length);
   	if(this.commandIsExecuting === false){
 
 		if(this.commands.length > 0){
@@ -29,7 +28,6 @@ function Unit(name){
 		this.currentCommand.Execute();
 
   		}
-
 	} else {
   		this.currentCommand.Execute();
   	} 	
@@ -57,16 +55,35 @@ Unit.prototype.Turn45R = function(){
 	this.commands.push(command);
 };
 
+Unit.prototype.complexTurn = function(){
+	var command = new Command(this, function(user, i){
+
+		var k = (i % 8 >= 4)? -1: 1;
+		user.n += 1 * k;
+
+		if(i % 33 === 0) user.activeState++;
+
+	}, function(user, i){
+		return i > 100;
+	});
+
+	this.commands.push(command);
+};
+
 function Command(unit, callback, finishConditions){
 	this.unit = unit;
 	this.callback = callback;
+	this.finishConditions = finishConditions;
+	this.i = 0; //command iteration
 
 	this.Execute = function(){
-		this.callback(this.unit);
+		this.callback(this.unit, this.i);
 		this.unit.commandIsExecuting = true;
-		console.log("n = " + this.unit.n);
+		console.log("i = " + this.i);
+		
+		this.i++; 
 
-		if(finishConditions(this.unit) === true){
+		if(this.finishConditions(this.unit, this.i) === true){
 		this.unit.commandIsExecuting = false;
 		}
 
