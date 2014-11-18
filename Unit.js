@@ -3,7 +3,7 @@
 function Unit(name){
   this.name = name;
   this.hp = 100;    //unit health
-
+  this.speed = 2;
   this.x = 0; 		// x xoordinate
   this.y = 0;		// y coordinate
     
@@ -27,6 +27,8 @@ function Unit(name){
 		this.currentCommand = this.commands.pop();
 		this.currentCommand.Execute();
 
+  		} else {
+  			this.activeState = 0;
   		}
 	} else {
   		this.currentCommand.Execute();
@@ -61,7 +63,29 @@ Unit.prototype.complexTurn = function(){
 		var k = (i % 8 >= 4)? -1: 1;
 		user.n += 1 * k;
 
-		if(i % 33 === 0) user.activeState++;
+		if(i % 33 === 0) user.activeState++	;
+
+	}, function(user, i){
+		return i > 100;
+	});
+
+	this.commands.push(command);
+};
+
+Unit.prototype.go = function(N){
+
+	var self = this;
+
+	var command = new Command(this, function(user, i){
+
+		var dy = Math.sin((N + 4) * Math.PI/8);
+		var dx = Math.cos((N + 4) * Math.PI/8);	
+
+		user.x += Math.round(dx * self.speed);
+		user.y += Math.round(dy * self.speed);
+
+		user.activeState = 1;
+		user.n = N;
 
 	}, function(user, i){
 		return i > 100;
