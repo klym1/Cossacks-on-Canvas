@@ -32,12 +32,7 @@ namespace ConvertAll
             {
                 Directory.CreateDirectory(OutputDirectory);
             }
-            
-//            foreach (var directory in allDirectories)
-//            {
-//                Verify.JoinAllImagesAndAlphasFromDirectory(directory, OutputDirectory);
-//            }
-            
+  
             SpriteInfos = new Collection<SpriteInfo>();
 
             foreach (var directory in joinedImagesOutput)
