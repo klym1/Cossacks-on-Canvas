@@ -52,7 +52,8 @@ if(unit.activeState > 0)
 	image = this._resources[state.spriteName];
 
 	this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
-
+	this.ctx.rect(unit.x, unit.y, 2, 2);
+	this.ctx.stroke();
 	}
 	};
 }

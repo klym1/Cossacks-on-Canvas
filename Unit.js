@@ -81,8 +81,8 @@ Unit.prototype.go = function(N){
 		var dy = Math.sin((N + 4) * Math.PI/8);
 		var dx = Math.cos((N + 4) * Math.PI/8);	
 
-		user.x += Math.round(dx * self.speed);
-		user.y += Math.round(dy * self.speed);
+		user.x += (dx * self.speed);
+		user.y += (dy * self.speed);
 
 		user.activeState = 1;
 		user.n = N;
