@@ -6,7 +6,7 @@ var initRunTime = new Date();
 
 	function gameLoop () {
 
-	//setTimeout(gameLoop, 50);
+		//setTimeout(gameLoop, 50);
 		window.requestAnimationFrame(gameLoop);
 		world.RenderUnits();
 	}
@@ -36,7 +36,7 @@ var initRunTime = new Date();
 	var horseman = new Unit("horseman");
 
 	horseman.x = 500;
-	horseman.y = 200;
+	horseman.y = 300;
 
 	world.units.push(horseman); 
 

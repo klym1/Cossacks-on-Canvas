@@ -18,11 +18,18 @@ namespace ConvertAll
 
         private static ICollection<SpriteInfo> SpriteInfos { get; set; } 
 
-        private static void Main()
+        private static bool IsDebug { get; set; }
+
+        private static void Main(string [] args)
         {
-            var allDirectories = Directory
-                .GetDirectories(BaseDirectory)
-                .Where(it => it.Contains("GRE"));
+//            var allDirectories = Directory
+//                .GetDirectories(BaseDirectory)
+//                .Where(it => it.Contains("GRE"));
+
+            if (args.Length > 0)
+            {
+                IsDebug = args[0] == "--d";
+            }
 
             var joinedImagesOutput = Directory
                .GetDirectories(OutputDirectory)
@@ -77,7 +84,7 @@ namespace ConvertAll
                 SpriteHeight = maxHeight,
                 SpriteWidth = maxWidth,
                 NumberOfFrames = c.Count / 9,
-                NumberOfDirections = 9
+                NumberOfDirections = 16
             };
 
             SpriteInfos.Add(spriteInfo);
@@ -90,22 +97,55 @@ namespace ConvertAll
         
         private static Bitmap CreateSpriteBitmap(List<B> c, int maxHeight, int maxWidth)
         {
-            var newimage = new Bitmap(maxWidth * 9, maxHeight * (c.Count / 9));
+            var newimage = new Bitmap(maxWidth * 16, maxHeight * (c.Count / 9));
 
             var graphics = Graphics.FromImage(newimage);
+
+            float[] dashValues = { 5, 5 };
+            
+            var pen = new Pen(Color.Red);
+
+            pen.DashPattern = dashValues;
 
             for (int z = 0; z < 9; z++)
             {
                 for (int i = z, j = 0; i < c.Count; i += 9, j++)
                 {
+                    if (IsDebug)
+                    {
+                        graphics.DrawRectangle(pen, z*maxWidth, maxHeight*j, c[i].Width, c[i].Height);
+                    }
+
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
-                    c[i].Content.Dispose();
+                    
+                    if (z > 0 && z < 8)
+                    {
+                        DrawFlippedImage(c, maxHeight, maxWidth, i, graphics, z, j);
+                    }
                 }
+
+               
             }
 
             graphics.Save();
 
             return newimage;
+        }
+
+        private static void DrawFlippedImage(List<B> c, int maxHeight, int maxWidth, int i, Graphics graphics, int z, int j)
+        {
+            float[] dashValues = { 5, 5 };
+
+            var pen = new Pen(Color.Red);
+
+            if (IsDebug)
+            {
+                graphics.DrawRectangle(pen, (-z + 16) * maxWidth, maxHeight * j, c[i].Width, c[i].Height);
+            }
+
+            c[i].Content.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+            graphics.DrawImage(c[i].Content, (-z + 16) * maxWidth + (maxWidth - c[i].Width), maxHeight * j);
         }
 
         private static void SaveBitmap(Bitmap bitmap, string path)

@@ -17,14 +17,14 @@ function Unit(name){
 
   this.tick = function(){
 
-  	console.log("tick");
+  	//console.log("tick");
   	if(this.commandIsExecuting === false){
 
 		if(this.commands.length > 0){
 
   		console.log("Command added");
 
-		this.currentCommand = this.commands.pop();
+		this.currentCommand = this.commands.shift();
 		this.currentCommand.Execute();
 
   		} else {
@@ -88,7 +88,7 @@ Unit.prototype.go = function(N){
 		user.n = N;
 
 	}, function(user, i){
-		return i > 100;
+		return i > 30;
 	});
 
 	this.commands.push(command);
@@ -106,7 +106,6 @@ function Command(unit, callback, finishConditions){
 		console.log("i = " + this.i);
 		
 		this.i++; 
-
 		if(this.finishConditions(this.unit, this.i) === true){
 		this.unit.commandIsExecuting = false;
 		}
