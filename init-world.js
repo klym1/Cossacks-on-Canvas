@@ -6,8 +6,8 @@ var initRunTime = new Date();
 
 	function gameLoop () {
 
-		//setTimeout(gameLoop, 50);
-		window.requestAnimationFrame(gameLoop);
+		setTimeout(gameLoop, 30);
+	//	window.requestAnimationFrame(gameLoop);
 		world.RenderUnits();
 	}
 
