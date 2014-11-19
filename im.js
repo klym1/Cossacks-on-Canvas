@@ -1,7 +1,7 @@
 "use strict";
 
-function IM(world, loading_completed_callback, update_callback){
-            this.store =  world._resources;
+function IM(render, loading_completed_callback, update_callback){
+            this.store =  render._resources;
             this.imagesAdded = 0;
             this.imagesLoaded = 0;
             this.add = function(url, name) {
