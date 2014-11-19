@@ -67,6 +67,8 @@ function Render (world) {
 	sx,
 	sy,
 	image,
+	prevQuantumValue = 0,
+	currQuantumValue = 0,
 	i;
 
   	this.RenderUnits = function() 
@@ -75,11 +77,18 @@ function Render (world) {
 
 		var units = this.world.units;
 
+		currQuantumValue = this.world.TimeQuantumNumber;
+
+		var allowMakeNextStep = false;
+
+		if(currQuantumValue - prevQuantumValue > 1){
+			prevQuantumValue = currQuantumValue;
+			allowMakeNextStep = true;
+		}
+
 		for (i = units.length - 1; i >= 0; i--) 
 		{
 			unit = units[i];
-			unit.tick();
-
 			state = unit.states[unit.activeState];
 
 			spriteWidth = state.spriteWidth;
@@ -87,8 +96,11 @@ function Render (world) {
 
 				if(unit.activeState > 0)
 				{
-					state.j++;
-					state.j %= state.k;
+					if(allowMakeNextStep)
+					{
+						state.j+=1;
+						state.j %= state.k;
+					}
 				}
 
 			sx = spriteWidth * unit.n;

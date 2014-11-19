@@ -4,11 +4,27 @@ function World(width, height) {
   this.width = width;
   this.height = height;
   this.units = [];
-  
-  this.AddUnits = function(unit) {
-	if(this.units === null) throw "Unit list is null";
-	if(unit === null) throw "Unit is null";
+  this.TimeQuantumNumber = 0;
+  this.QuantumEpoch = 0;
 
-	this.units.push(unit);
-  };
+  this.Run = function(){
+  	
+  	var self = this;
+
+  	setInterval(function(){
+  		for (var i = 0; i < self.units.length; i++) {
+  			self.units[i].tick();
+  		};
+
+  		self.TimeQuantumNumber++;
+
+  		if(self.TimeQuantumNumber == 1024){
+  			self.QuantumEpoch++;
+  			self.TimeQuantumNumber = 0;
+  		}
+
+  		console.log("World time: " + self.TimeQuantumNumber);	
+
+  	}, 100);
+  }
 }

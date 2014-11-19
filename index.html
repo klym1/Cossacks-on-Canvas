@@ -1,5 +1,6 @@
 <html>
     <style type="text/css">
+
     #coinTapGameContainer {
         width: 1024px;
         height: auto;
@@ -29,18 +30,45 @@
             <canvas id="can"></canvas>
         </div>
         <h1 id = "loading-container"></h1>
+
         <script src="sprites_png\sprites-info.json"></script>
         <script src="im.js"></script>
-		
         <script src="World.js"></script>
         <script src="Command.js"></script>
         <script src="Unit.js"></script>
         <script src="UnitState.js"></script>
         <script src="animationLoop.js"></script>
-        <script src="InitWorld.js"></script>
         <script src="Render.js"></script>
 
         <script type="text/javascript">
+
+            var world = (function () {
+                
+                var world = new World(5000, 5000);
+
+                var grenadier = new Unit("Grenadier");
+
+                grenadier.x = 500;
+                grenadier.y = 300;
+
+                world.units.push(grenadier); 
+
+                for(var i = 0; i < sprites.length; i++){
+                    
+                    var unit_state = new UnitState(
+                        sprites[i].UnitName, 
+                        sprites[i].SpriteHeight, 
+                        sprites[i].SpriteWidth, 
+                        sprites[i].NumberOfFrames);
+
+                    grenadier.states.push(unit_state);
+                }
+                
+                return world;
+            } ());
+
+            world.Run();
+
             var render = new Render(world);
                 render.init();
 
