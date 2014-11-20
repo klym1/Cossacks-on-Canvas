@@ -11,8 +11,8 @@ function Render (world) {
 
 		var binded = self.gameLoop.bind(self);
 
-		setTimeout(binded, 100);
-		//window.requestAnimationFrame(binded);
+		//setTimeout(binded, 100);
+		window.requestAnimationFrame(binded);
 		self.RenderUnits();
 	}
 

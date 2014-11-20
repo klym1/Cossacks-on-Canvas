@@ -6,7 +6,7 @@ function World(width, height) {
   this.units = [];
   this.TimeQuantumNumber = 0;
   this.QuantumEpoch = 0;
-  this.TickTime = 50;
+  this.TickTime = 30;
 
   this.Run = function(){
   	
