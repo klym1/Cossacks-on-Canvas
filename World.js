@@ -25,6 +25,6 @@ function World(width, height) {
 
   		console.log("World time: " + self.TimeQuantumNumber);	
 
-  	}, 100);
+  	}, 50);
   }
 }

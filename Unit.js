@@ -2,8 +2,8 @@
 
 function Unit(name){
   this.name = name;
-  this.hp = 100;    //unit health
-  this.speed = 2;
+  this.hp = 100;    
+  this.speed = 2.3;
   this.x = 0; 		// x xoordinate
   this.y = 0;		// y coordinate
     
@@ -14,6 +14,8 @@ function Unit(name){
   this.commands = [];
   this.commandIsExecuting = false;
   this.currentCommand = null;
+
+  this.State = {};
 
   this.tick = function(){
 
@@ -27,12 +29,18 @@ function Unit(name){
 		this.currentCommand.Execute();
 
   		} else {
-  			this.activeState = 0;
+  			this.SetState(0);
   		}
 	} else {
   		this.currentCommand.Execute();
   	} 	
   };
+}
+
+Unit.prototype.SetState = function(state){
+
+	this.activeState = state;
+	this.State = this.states[state];
 }
 
 Unit.prototype.Turn45L = function(){
@@ -62,12 +70,17 @@ Unit.prototype.go = function(N){
 	var command = new Command({
 		unit : this,
 		callback : function(user, i, initData){
+
 			if(i < initData.length - 1)
 			{
 				user.x = initData[i][0];
 				user.y = initData[i][1];
+
+				user.State.j += 1;
+				user.State.j %= user.State.k;	
 			}
-			user.activeState = 1;
+
+			user.SetState(1);
 			user.n = N;
 		},
 

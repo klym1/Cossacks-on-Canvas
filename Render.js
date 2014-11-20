@@ -11,7 +11,7 @@ function Render (world) {
 
 		var binded = self.gameLoop.bind(self);
 
-	//	setTimeout(self.gameLoop, 30);
+		//setTimeout(binded, 100);
 		window.requestAnimationFrame(binded);
 		self.RenderUnits();
 	}
@@ -60,53 +60,24 @@ function Render (world) {
 		}
 	}
 	
-	var unit, 
-	state, 
-	spriteWidth, 
-	spriteHeight,
-	sx,
-	sy,
-	image,
-	prevQuantumValue = 0,
-	currQuantumValue = 0,
-	i;
-
   	this.RenderUnits = function() 
   	{
 		this.ctx.clearRect(0, 0, this.canvas_width , this.canvas_height);
 
 		var units = this.world.units;
 
-		currQuantumValue = this.world.TimeQuantumNumber;
-
-		var allowMakeNextStep = false;
-
-		if(currQuantumValue - prevQuantumValue > 1){
-			prevQuantumValue = currQuantumValue;
-			allowMakeNextStep = true;
-		}
-
-		for (i = units.length - 1; i >= 0; i--) 
+		for (var i = units.length - 1; i >= 0; i--) 
 		{
-			unit = units[i];
-			state = unit.states[unit.activeState];
+			var unit = units[i];
+			var state = unit.State;
 
-			spriteWidth = state.spriteWidth;
-			spriteHeight = state.spriteHeight;
+			var spriteWidth = state.spriteWidth;
+			var spriteHeight = state.spriteHeight;
 
-				if(unit.activeState > 0)
-				{
-					if(allowMakeNextStep)
-					{
-						state.j+=1;
-						state.j %= state.k;
-					}
-				}
+			var sx = spriteWidth * unit.n;
+			var sy = spriteHeight * state.j;
 
-			sx = spriteWidth * unit.n;
-			sy = spriteHeight * state.j;
-
-			image = this._resources[state.spriteName];
+			var image = this._resources[state.spriteName];
 
 			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
 			this.ctx.rect(unit.x, unit.y, 2, 2);
