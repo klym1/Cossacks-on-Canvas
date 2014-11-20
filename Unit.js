@@ -109,3 +109,8 @@ Unit.prototype.go = function(N){
 
 	this.commands.push(command);
 };
+
+Unit.prototype.toString = function()
+{
+	return this.name;
+}

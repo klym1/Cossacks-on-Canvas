@@ -9,3 +9,8 @@ function UnitState(spriteName, spriteHeight, spriteWidth, k){
   this.j = 0; //current sprite frame offset index
   this.k = k; // number of frames
 }
+
+UnitState.prototype.toString = function()
+{
+    return "[" + this.k + " " + this.j + "]";
+}

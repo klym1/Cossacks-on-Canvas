@@ -6,6 +6,7 @@ function World(width, height) {
   this.units = [];
   this.TimeQuantumNumber = 0;
   this.QuantumEpoch = 0;
+  this.TickTime = 50;
 
   this.Run = function(){
   	
@@ -25,6 +26,6 @@ function World(width, height) {
 
   		console.log("World time: " + self.TimeQuantumNumber);	
 
-  	}, 50);
+  	}, this.TickTime);
   }
 }

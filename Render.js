@@ -11,8 +11,8 @@ function Render (world) {
 
 		var binded = self.gameLoop.bind(self);
 
-		//setTimeout(binded, 100);
-		window.requestAnimationFrame(binded);
+		setTimeout(binded, 100);
+		//window.requestAnimationFrame(binded);
 		self.RenderUnits();
 	}
 
@@ -62,6 +62,8 @@ function Render (world) {
 	
   	this.RenderUnits = function() 
   	{
+		this.WriteStatusInfo(this.world);
+
 		this.ctx.clearRect(0, 0, this.canvas_width , this.canvas_height);
 
 		var units = this.world.units;
@@ -84,4 +86,38 @@ function Render (world) {
 			this.ctx.stroke();
 		}
 	};
+
+	this.WriteStatusInfo = function(world)
+	{
+		document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
+		document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0]));
+	}
+
+	this.MaterializeStatusData = function(items)
+	{
+		var resultString = "";
+
+		for (var i = 0; i < items.length; i++) {
+			var t = items[i];		
+
+			resultString += t[0] + ": " + t[1] + "</p>";
+		};
+
+		return resultString;
+	}
+
+	this.GetInfoRecursively = function(rootObject)
+	{
+		var result = [];
+
+		for (var property in rootObject) {
+    		if (rootObject.hasOwnProperty(property) 
+    			&& typeof rootObject[property] != 'function') {  			
+    			
+       			result.push([property, rootObject[property]])
+    		}
+		}
+
+		return result;
+	}
 };

@@ -28,3 +28,7 @@ function Command(o){
 		}
 	};
 }
+
+Command.prototype.toString = function() {
+	return this.i;
+};
