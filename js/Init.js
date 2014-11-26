@@ -1,4 +1,3 @@
-           
 var SHOW_DEBUG_INFO = false;
 
 var world = (function () {
