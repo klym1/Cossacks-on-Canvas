@@ -166,18 +166,24 @@ namespace ConvertAll
             IntPtr scan0 = imageData.Scan0;
 
             Marshal.Copy(scan0, imageBytes, 0, imageBytes.Length);
-            
-            for (int i = 0; i < imageBytes.Length; i += 3)
+
+            var bytesPerPixel = 4;
+
+            var l = 0;
+
+            for (int i = 0; i < imageBytes.Length; i += bytesPerPixel)
             {
-                //byte pixelR = imageBytes[i + 2];
-              //  byte pixelG = imageBytes[i + 1];
+                byte pixelA = imageBytes[i + 3];
+                byte pixelR = imageBytes[i + 2];
+                byte pixelG = imageBytes[i + 1];
                 byte pixelB = imageBytes[i];
-                
-                
-               // imageBytes[i + 2] = pixelR;
-               // imageBytes[i + 1] = pixelG;
-                imageBytes[i] = pixelB;
-                
+
+
+                imageBytes[i + 3] = pixelA;
+                imageBytes[i + 2] = 0;
+                imageBytes[i + 1] = 0;
+                imageBytes[i] = 0;
+                l++;
             }
 
             Marshal.Copy(imageBytes, 0, scan0, imageBytes.Length);
