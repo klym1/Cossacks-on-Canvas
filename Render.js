@@ -62,8 +62,8 @@ function Render (world) {
 	
   	this.RenderUnits = function() 
   	{
-		this.WriteStatusInfo(this.world);
-
+  		this.WriteStatusInfo(this.world);
+		
 		this.ctx.clearRect(0, 0, this.canvas_width , this.canvas_height);
 
 		var units = this.world.units;
@@ -89,8 +89,14 @@ function Render (world) {
 
 	this.WriteStatusInfo = function(world)
 	{
-		document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
-		document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0]));
+		if(SHOW_DEBUG_INFO === true)
+		{
+			document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
+			document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0]));
+		} else {
+			document.getElementById("world-info").innerHTML = null;
+			document.getElementById("unit-info").innerHTML = null;
+		}
 	}
 
 	this.MaterializeStatusData = function(items)
