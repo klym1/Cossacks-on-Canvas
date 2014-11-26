@@ -1,0 +1,372 @@
+<DIV align=center><STRONG><SPAN style="COLOR: #ffd700; FONT-SIZE: 18pt">MD File Information</SPAN></STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Under construction</STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Alphabetical Index : </STRONG><BR><A href="http://cossacksworld.ucoz.co.uk/index/0-193">A-C</A>&nbsp; &nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-232">D-F</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-233">G-L</A>&nbsp; &nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-234">M-O</A>&nbsp;&nbsp; P-S&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-237">T-Z</A> </DIV>
+<DIV>
+<HR>
+</DIV><BR>* PAGE1 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= an extra tab(page) is added in the game menu. AC stuff, lacks icon &amp; interface buttons in C2. Not sure if they can be added easily <BR>{} <BR>
+<HR>
+<BR>* PAGE2 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= an extra tab(page) is added in the game menu. <BR>{} <BR>
+<HR>
+<BR>* PAGE3 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= an extra tab(page) is added in the game menu. <BR>{} <BR>
+<HR>
+<BR>* PAGE1HINT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= allows hintto be displayed on the extra tab.The hint itself is defined in txt or nres.dat <BR>{} <BR>
+<HR>
+<BR>* PAGE2HINT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= allows hintto be displayed on the extra tab.The hint itself is defined in txt or nres.dat <BR>{} <BR>
+<HR>
+
+<DIV><BR>* PAGE3HINT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= allows hintto be displayed on the extra tab.The hint itself is defined in txt or nres.dat <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* PARTICLES <BR>$ LinkTo node <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? </DIV>
+<DIV>
+<HR>
+<BR>* PEASANT</DIV>
+<DIV>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Not sure why it needs to be specified in the md that its a peasant, its not for the ability to build, cause thats set in the nds under [FIXED-PRODUCE] so must be something else. <BR>
+<HR>
+</DIV>
+<DIV>* PEASANTABSORBER <BR>$ MaxInside <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ PEASANTABSORBER 10 <BR>= Sets a building to a state where units can occupy the building. <BR>
+<HR>
+</DIV>
+<DIV>* PEASANTCONVERTOR <BR>$ PEASANTCONVERTOR <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ PEASANTCONVERTOR <BR>= if you send a unit in to a building with this line, it will convert them in soldiers. Not sure if a message is attached to this telling if there are no peasants inside you need to put them insid. //check with #Ne messages under ctrl+E. <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* PIONEER <BR>$ PIONEER <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ PIONEER <BR>= Subtype of USAGE. Pioneers are sappers, engineers <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* PIECE <BR>$ folder\sample <BR>[] / <BR>&amp; BUILDINGS &amp; UNITS <BR>+ / <BR>^ PIECE BUILDINGS\BldTow.smp <BR>= This is used to show a preview of the building in game and editor before actually construction the building/unit. For new buildings these can be created in the editor with selecting &amp; ctrl+c ( save's to folder UserPieces, possibly needed to add this folder manually, but you should know this by now) and then move to an appropriate folder: Buildings ,in this case. <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* PLACEINTRANSPORT <BR>$ placeintransport n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ <BR>= The amount of place a unit takes or how much space their is in a transport <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* PORT <BR>$ MaxPortDist BuiDist port <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= For harbours, check with CI&amp;Ac, Alex <BR>
+<HR>
+</DIV>
+<DIV>* PORTBRANCH <BR>$ PORTBRANCH n <BR>[] 0 , <BR>&amp; UNITS <BR>+ / <BR>^ PORTBRANCH 0 <BR>= Set's the branch the unit belongs to <BR>
+<HR>
+</DIV>
+<DIV>* PORTBACKSPRITE <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Set's the image in the BACKGROUND of the interface ( generic soldier, horse,...) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* PORTBACKCOLOR <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Sets the color of the background of the interface <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* PORTION <BR>$ portion MaxResPortion resource <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ PORTION 6 WOOD 100 GOLD 10 STONE 100 FOOD 50 IRON 10 COAL 10 <BR>= Resource capacity of workers. 6 types in this case, followed by the resource and the max amount <BR>
+<HR>
+</DIV>
+<DIV>* PORTIONLIMIT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* POINT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* POINTLINESORT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* POSPOINTS <BR>$ <BR>[] <BR>&amp; <BR>+ MISSINSIDEDAMAGE <BR>^ POSPOINTS 55 0 -4 -75 -4 75 -4 -150 -4 150 -4 -15 -4 -90 -4 60 -4 -165 -4 135 -4 15 -4 -60 -4 90 -4 -135 -4 165 -4 -30 -4 -105 -4 45 -4 -180 -4 120 -4 30 -4 -45 -4 105 -4 -130 -4 180 -4 <BR>0 -12 -75 -12 75 -12 -150 -12 150 -12 -15 -12 -90 -12 60 -12 -165 -12 135 -12 15 -12 -60 -12 90 -12 -135 -12 165 -12 -30 -4 -105 -12 45 -12 -180 -12 120 -12 30 -12 -125 -12 105 -12 -130 -12 180 -12 <BR>0 4 15 4 -15 4 30 4 -40 4 <BR>= (^FromBastionv.md-Alexander) Sets positions of units when they appear on buildings? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PLANEFACTOR <BR>$ PLANEFACTOR n <BR>[] / <BR>&amp; BUILDINGS <BR>+ <BR>^ PLANEFACTOR 0,2 <BR>= ? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PRICE <BR>$ price NeedRes <BR>[] / <BR>&amp; BUILDING &amp; UNITS <BR>+ / <BR>^ PRICE 2 WOOD 450 STONE 700 <BR>= Amount of Resources and how much of each resource the unit/building costs <BR>
+<HR>
+</DIV>
+<DIV>* PRIEST <BR>$ PRIEST <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ PRIEST <BR>= Subtype of USAGE <BR>
+<HR>
+</DIV>
+<DIV>* PRODUCER <BR>$ PeasantAdd FreeAdd producer <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Produces n resources in a mine <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PROMAX <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PROMAX2 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PROMAXCTG <BR>$ PROMAXCTG n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ PROMAXCTG 1 <BR>= ???EngKGen.md has this line, not sure what it does. <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* PROTECTION <BR>$ protection Protection <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>
+<HR>
+</DIV>
+<DIV>* PSIXOZ <BR>$ psixoz <BR>[] <BR>&amp; <BR>+ <BR>^ PSIXOZ 128 (Priest) PSIXOZ 196 (General) PSIXOZ 96 (<BFE <br Guards)>= Insane? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RANGE <BR>$ AttackRange MaxAttackRange MinAttRange MaxNearRange ActionType VisibilityRadius <BR>[] / <BR>&amp; / <BR>+ BUILDINGS &amp; UNITS <BR>^ RANGE 18 6 22 0 0 9 <BR>= <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RATE <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= RATE 0 XX (speed of cavalry charge?) @MOTION_L without number it's normal speed. if the unit have some different walking animations (@MOTION_L0 or L1.... to L12 max) write RATE X Y ; with X the number of the animation, and Y the speed, under 22 exactly to slow down the speed, and upper if you want the speed up <BR>{} '%s,line %d : Attack type index in RATE must be less 4',0 <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RASTRATA_NA_VISTREL <BR>$ rastrata_na_vistrel ResAttType rastrata <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ RASTRATA_NA_VISTREL 1 1 COAL 5 <BR>= Resource consumption on shooting with weapon vistrel. 1 is the weapon index, second 1 is the amount of resources, then theresource specified and the 5 is the amount of the resource consumed on shooting ( or for reloading if you like) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RASTRATA_NA_VISTREL2 <BR>$ rastrata_na_vistrel2 ResAttType1 ResAttType rastrata <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ <BR>= Resource consumption on shooting with weapon vistrel2? Notice that it seems to require 2 ResAttType's ( from engine.x) <BR>
+<HR>
+</DIV>
+<DIV>* RAZBROS <BR>$ razbrosamount <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ RAZBROS 300 <BR>= Inaccuracy of firing. Can be decreased trough ~.nds [UPGRADES] <BR>
+<HR>
+</DIV>
+<DIV>* RECTANGLE <BR>$ RectLy RextLx RectDy RectDx <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ RECTANGLE 0 60 180 200 <BR>= defines x y (z?) axis of unit ( size of square underneat building?) <BR>I assume this is the box that appears around the unit when it is selected, but am not sure ---&gt; meaning if the box is bigger then the actual building, you can select the building without actually clicking on it, but next to it <BR>
+<HR>
+</DIV>
+<DIV>* REFLECT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ REFLECT #PSTAND1 <BR>= Indicates the reflection of the object ( ships) in the water and which object to reflect <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* REFLECTMODEL <BR>$ reflectmodel <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RESCONSUMER <BR>$ resconsumeramount restype n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ CANSTOPBUILD &amp; NAEMNIK <BR>^ RESCONSUMER 1 GOLD 20 <BR>= Sets a unit or building to a state where they maintain a certain amount of resources for upkeep ( maintenance). Can be combined with CANSTOPBUILD ( if you run out of resources, units will stop building, cfr. CI walls) or NAEMNIK ( units will mutiny if you run out of resources) <BR>
+<HR>
+</DIV>
+<DIV>* RESOURCEBASE <BR>$ resourcebase amount resource <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ RESOURCEBASE 1 FOOD <BR>= Resource procurement support <BR>
+<HR>
+</DIV>
+<DIV>* RESSUBST <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? resource substitution?? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* RETREATRADIUS <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Radius at which the unit will start running in fear <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* ROTATE <BR>$ MinRotator <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ ROTATE 16 <BR>= Speed of rotation for units <BR>
+<HR>
+</DIV>
+<DIV>* RPLACESPEED <BR>$ rplacespeed <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? Rotateplacespeed? <BR>{} '%s,line %d :To use RPLACESPEED you should define #ROTATEATPLACE animation',0 <BR>
+<HR>
+</DIV>
+<DIV>* SEARCH_ENEMY_RADIUS <BR>$ search_enemy_radius n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ SEARCH_ENEMY_RADIUS 900 <BR>= Range at which units/buildings will notice enemies and start pursuing/shooting if in attack mode. <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SEARCH_ENEMY_RADIUS_SHIFT <BR>$ SEARCH_ENEMY_RADIUS_SHIFT n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ SEARCH_ENEMY_RADIUS_SHIFT 70 <BR>= ??? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SELFTRANSFORM <BR>$ ActivePtY ActivePtX <BR>[] <BR>&amp; <BR>+ <BR>^ SELFTRANSFORM <BR>= transforms self in to ??? Bastionv.md-Alexander) <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SELTYPE <BR>$ SELTYPE type n n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ SELTYPE RoundArtL 1 0.8 <BR>= Selection ring type. These can be found in Also see SelectionType Editor in the Ctrl+E menu in map editor. <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SELTYPE_BRIG <BR>$ SELTYPE_BRIG Type n n <BR>[] / <BR>&amp; UNITS <BR>+ SELTYPE <BR>^ SELTYPE_BRIG BrigRound 1 1 <BR>= Selection type for brigades ( formations) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SELSHIFT <BR>$ SELSHIFT n <BR>[] / <BR>&amp; <BR>+ <BR>^ SELSHIFT -48 (rocket.md) <BR>= ????Selection Shift?? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SELECT_SOUND <BR>$ SELECT_SOUND SoundName <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ SELECT_SOUND BLD_MIL <BR>= Sound played on selecting unit/building <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SETACTIVEPOINT <BR>$ setactivepoint #ANIMATION n n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ SETACTIVEPOINT #ATTACK1 28 124 109 108 106 94 104 89 96 85 89 88 82 97 76 110 73 125 72 <BR>= ??</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SETACTIVEPOINT0 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ SETACTIVEPOINT0 #ATTACK 5 (peasant) <BR>= ???? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SETACTIVEPOINT2 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SETACTIVEPOINT3 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SETANMPARAM <BR>$ NApartSize NAparts NastartDy NastartDx <BR>[] <BR>&amp; <BR>+ <BR>^ SETANMPARAM -111 -67 1 0 <BR>= for animations numbers refer to offset of piture(x,y) sprites/pipture sprite width. This is the offset for the drawing of the sprite for the building. When you select a position for the building to be produced this is adjusted by the first 2 numbers (x=x-111, y=y-67) to find the top left hand corner for the building sprite. IN this case the building is 240 x 143 pixels for the first image. Remember the blocks when adjusting coordinates, also remember that the points are not necessarily half the sprite width as this is different for each frame, just as long as its relevant to the centre point of the building. <BR>
+<HR>
+</DIV>
+<DIV>* SETHOTFRAME <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ SETHOTFRAME #ATTACK 64 locator1 <BR>= ??(from Kol.md -Alexander-building)???? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHAMAN <BR>$ SHAMAN <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ SHAMAN <BR>= Unit subtype of USAGE, shaman : indian priest <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOTS <BR>$ shots ShotPtY ShotPtX <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ SHOTS 18 504 399 434 402 363 394 301 374 257 346 236 316 245 260 273 207 318 169 373 152 427 146 492 150 538 161 589 196 623 222 646 270 671 234 600 287 <BR>= Sets number of shots, followed by x &amp; y pairs with positions of origin for shots. <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* SHOTDELAY <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOWDELAY <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SINGLESTEP <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SITINFORMATIONS <BR>$ SITINFORMATIONS <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ SITINFORMATIONS <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SKILLDAMAGEFORMBONUSSTEP <BR>$ n <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Formation bonus on 10 kills ( speed) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SKILLFORMBONUS <BR>$ n <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Formation bonus on 10 kills ( damage) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SKILLDAMAGEBONUS <BR>$ n <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Formation bonus on 10 kills ( Damage) <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SKILLDAMAGEMASK <BR>$ n <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Formation bonus on n kills</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SLOWDEATH <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SLOWFRAME <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SLOWRECHARGE <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Makes units have to not move to reload and makes the reload animation loop while reloading <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SMOKE <BR>$ smoke <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ SMOKE 9 221 209 256 197 256 91 190 213 270 87 286 157 311 205 228 95 323 245 <BR>= Sets the points where smoke will appear. 9 pairs with x &amp; y positions in this case. Note that you can visually edit these with the Fires&amp;Smoke editor under the ctrl+e options in map editor. The coordinates will be automatically save to the md file. <BR>
+<HR>
+</DIV>
+<DIV>* SOUND <BR>$ sound <BR>[] / <BR>&amp; BUILDINGS &amp; UNITS <BR>+ Animation description <BR>^ SOUND 255 #BUILDLO_0 PILA <BR>= Set's the sound.In this case, on building the frames #BUILDLO_0 (as defined under //Animations Description) it will play sound PILA. Can have multiple entries for all the various works on building eg. <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SOUND2 <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* SPEEDSCALEONTREES <BR>$ SPEEDSCALEONTREES n <BR>[] <BR>&amp; <BR>+ <BR>^ SPEEDSCALEONTREES 60 <BR>= ??? Speed unit has when going trough forests?(duplicate entry) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STAGELOCKPOINTS <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= For [UPGRADESTAGE] sections on buildings (AC forts) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STAGE_FIRES <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= For Stage section fires points <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STAGE_SMOKE <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= For stage section smoke points <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STANDANYWHERE <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STANDGROUND <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Standground by default ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STORMFORCE <BR>$ stormforce <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Force use when storming a building?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STRIKEFLYSPEED <BR>$ strikeflymaxspeed strikeflyspeed <BR>[] / <BR>&amp; UNITS <BR>+ <BR>^ STRIKEFLYSPEED 0 200 <BR>= ??? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STRIKEFORCE <BR>$ strikeforce <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STRIKEPROBABILITY <BR>$ strikeprobability <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Probability of doing damage? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STRIKEROTATE <BR>$ strikerotate <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ability to attack on rotating? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STRIKE_SOUND <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SPECIALSEL <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? Special selection? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SPEEDSCALE <BR>$ n % <BR>[] <BR>&amp; <BR>+ <BR>^ SPEEDSCALE 100 ( from AllBal.md Alexander-ballista) <BR>= animation scaled speed change ???? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SPEEDSCALEONTREES <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= duplicate entry <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOTALWAYSON <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOWIDLE <BR>$ SHOWIDLE <BR>[] / <BR>&amp; <BR>+ <BR>^ SHOWIDLE <BR>= Sets a building to display the idle peasant icons (and the autowork icon(?) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOWIDLEPEASANTS <BR>$ SHOWIDLEPEASANTS <BR>[] <BR>&amp; <BR>+ <BR>^ SHOWIDLEPEASANTS <BR>= Set's a building to show idle peasants button? not same as SHOWIDLE then? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SHOWIDLEMINES <BR>$ SHOWIDLEMINES <BR>[] <BR>&amp; <BR>+ <BR>^ SHOWIDLEMINES <BR>= Show idle mines button in a building <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SPRITES <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* SPRITEOBJECT <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= for Walls? Field? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STANDGROUNDTIME <BR>$ STANDGROUNDTIME n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ STANDGROUNDTIME 10 <BR>= Sets the time it takes before the formation is in standground mode after clicking the icon. <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* STOPDISTANCE <BR>$ STOPDISTANCE n <BR>[] <BR>&amp; <BR>+ <BR>^ STOPDISTANCE 1024 <BR>= from RUSKCHKOZ.MD (horse) ???? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>Guess what, another page after this ;-)</DIV>

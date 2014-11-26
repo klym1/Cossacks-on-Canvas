@@ -1,0 +1,163 @@
+<DIV align=center><STRONG><SPAN style="COLOR: rgb(255,215,0); FONT-SIZE: 18pt">MD File Information</SPAN></STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Under Construction</STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Alphabetical Index : </STRONG><BR><A href="http://cossacksworld.ucoz.co.uk/index/0-193">A-C</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-232">D-F</A>&nbsp;&nbsp;&nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-233">G-L</A>&nbsp; &nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-234">M-O</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-236">P-S</A>&nbsp;&nbsp; T-Z </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><BR>* <STRONG>TAKERESSTAGES</STRONG> <BR>$ TakeResStage GoWithStage <BR>[] / <BR>&amp; UNITS <BR>+ PEASANT <BR>^ TAKERESSTAGES FOOD 3 3 4 <BR>TAKERESSTAGES WOOD 0 5 2 <BR>TAKERESSTAGES IRON 4 3 1 <BR>TAKERESSTAGES COAL 5 3 2 <BR>TAKERESSTAGES GOLD 1 3 0 <BR>TAKERESSTAGES STONE 2 8 7 <BR><BR>= TAKERESSTAGES (Attack Weapon No:) (Drop Animation) (Work Animation) <BR>Helps you to define how a unit works on a sprite (3d objects in case of HoAE or Alexander)<BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TIME <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TIMEANIMATION</STRONG> <BR>$ variation frames timeanimation <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>TIREDCHANGE</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Change of unit parameters by percent when Tired. (Must be defined in Morale.dat and Nres.dat before)<BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TORG </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Market. Makes the market desk appear in a building <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>TOPLINESORT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TRANSFORMTOMEAT</STRONG> <BR>$ n <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Transformation to meat in n seconds after death <BR>{} <BR>
+<HR>
+<BR></DIV>
+<DIV>* <STRONG>TRANSPORT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= sets a vessel ( building) to a state where it can ' transport-lodge' units </DIV>
+<DIV>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TURNOFF</STRONG> <BR>$ / <BR>[] / <BR>&amp; BUILDINGS &amp; UNITS <BR>+ RESCONSUMER &amp; RASTRATA_NA_XXXXX <BR>^ <BR>= Used for walls for example, if you run out of stone, peasants will stop building, if its a RESCONSUMER ( also goes for shooting units running out of coal makes them stop shooting) or units that consume coal or iron on shooting, if you run out they cant shoot anymore (though this is silly really, cause if you dont have coal and iron, they can't reload) <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>TWOPARTS</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>UMS_PRICE </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>UNBEATABLEWHENFREE </STRONG><BR>$ UNBEATABLEWHENFREE <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ UNBEATABLEWHENFREE <BR>=&nbsp; if there are no more units inside the building you cannot destroy it or storm it.<BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>UNITABSORBER</STRONG> <BR>$ UNITABSORBER n <BR>[] <BR>&amp; <BR>+ <BR>^ UNITABSORBER 5 <BR>= Sets a building/vessel to a state where it can absorb x amount of units <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>UNITKIND</STRONG> <BR>$ <BR>[] PEASANT <BR>BUILDING <BR>TOWER <BR>WALL <BR>&amp; <BR>+ <BR>^ vs USAGE <BR>= <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>UNITRADIUS</STRONG> <BR>$ unitradius <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Radius of information displayed. Like the mini lifebar size and the 'Alt' key information for a monster.<BR>
+<HR>
+</DIV>
+<DIV>*<STRONG> USAGE</STRONG> <BR>$ usage <BR>[] SKLAD /Storehouse <BR>MELNICA /Mill <BR>TOWER /Tower <BR>CENTER /Townhall <BR>MINE /Mine <BR>FASTHORSE /Fast Cavalry <BR>MORTIRA /Mortar <BR>PUSHKA /Cannon <BR>MCANNON /Limber <BR>GRENADER /Grenadier <BR>HARDWALL /Stone Wall <BR>WEAKWALL /Wooden Wall <BR>LINKOR /Battle Ship <BR>WEAK / ? <BR>FISHER /Fishboat(random movement food collecting) <BR>SUPERMORTIRA /? <BR>LIGHTINFANTRY /Light Infantry <BR>STRELOK /Archer <BR>HARDHORCE /Heavy Cavalry <BR>HORSE-STRELOK /Mounted Archer <BR>FREGAT /Frigate <BR>GALERA /Galley <BR>IAXTA /Yacht <BR>SHEBEKA /Xebeq <BR>PAROM /Boat(transport) <BR>DIPLOMAT Sets the Academy desk ( information) to pop up on selecting this building. See also Dialogs\v\AcademyDesk.Dialogsystem.xml <BR>MENT /Civilian/guard? <BR>EGER /? <BR>COSTLY /gold consuming <BR>COMMANDCENTER /Building will act as Com Center ( for rallying troops) <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ ... <BR>= Note that multiple different usages can be applied <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>USERLC <BR></STRONG>$ userlc n (Folder\).g17/.g16 name SHADOW n n <BR>[] / <BR>&amp; BUILDINGS &amp; UNITS <BR>+ / <BR>^ USERLC 0 UnitsG17\EngKriG SHADOW -126 -148 //19 ñòîÿòü <BR>USERLC 1 UnitsG17\EngKriG_Drv SHADOW -126 -148 //23 idet s drowami <BR>USERLC 2 UnitsG17\EngKriG_Tch SHADOW -126 -148 //23 tolkat telezhku <BR>USERLC 3 UnitsG17\EngKriG_Urg SHADOW -126 -148 //23 idet s pshenicei <BR>USERLC 4 UnitsG17\EngKriP_Drv SHADOW -126 -148 //63 podnimaet drowa <BR>USERLC 6 UnitsG17\EngKriP_Urg SHADOW -126 -148 //45 podnimaet pshenicu <BR>USERLC 7 UnitsG17\EngKriU SHADOW -126 -148 //41 udar <BR>USERLC 8 UnitsG17\EngKriU_Drv SHADOW -126 -148 //39 èäòè ñ äðîâàìè <BR>USERLC 9 UnitsG17\EngKriU_Str SHADOW -126 -148 //83 ïîëîòü <BR>USERLC 10 UnitsG17\EngKriU_Urg SHADOW -126 -148 //57 ïîëîòü <BR>USERLC 11 UnitsG17\EngKriH SHADOW -126 -148 //53 ïîëîòü <BR>USERLC 12 UnitsG17\EngKriC SHADOW -126 -148 //61 ïîëîòü <BR>USERLC 13 UnitsG17\EngKriU_Kir SHADOW -126 -148 //57 ïîëîòü <BR>= Calling the graphics file's here (&amp; animations). The number after USERLC defines which index the graphic file's gets, which on its turn is then beeing used in the various graphic section strings.<BR><BR>USERLC (serial number) (path) (SHADOW size/direction in Cartesian co-ordinates)<BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>USERLCEXT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= external rlc usage? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>USETRANSX <BR></STRONG>$ USETRANSX n <BR>[] / <BR>&amp; UNITS <BR>+ ? <BR>^ USETRANSX 0 <BR>USETRANSX 1 <BR>USETRANSX 2 <BR>= See also DIRECTTRANS.. ?? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VES</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VESACCEL</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ VESACCEL 28 42 <BR>= Accelleration? vessel??? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VESLA <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VETERAN</STRONG> <BR>$ VETERAN n n n <BR>[] / <BR>&amp; UNITS <BR>+ EXPERT,...? <BR>^ VETERAN 4 2 2 <BR>= In C2, Formation experience is guided by the engine parameters and md parameters. However in HoAE/C2 and Alexander; there is also the possibility for<BR>&nbsp;&nbsp; a second type of experience system guided by "UnitExperienceParm.xml". This is activated by VETERAN and EXPERT parameters. So its like EXPERT 2n n n and<BR>&nbsp;&nbsp; VETERAN 2n n n, where n = kills required. The Unit first gets the EXPERT status at n kills and then gets the VETERAN status at n more kills.<BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>*<STRONG> VISION </STRONG><BR>$ vision n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ VISION 0 <BR>= Radius of vision vs fog of war. 0 is default. 2 is 2 time's larger then default, etc...40 is rougly 1/4 of a large map. <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VISITORMASK</STRONG> <BR>$ VISITORMASK n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ VISITORMASK 2 <BR>= Place a unit takes in a transport (building). Visitor mask can be tuned , to allow only specific units inside a building<BR>&nbsp;&nbsp; or Unit Absorber.<BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>VIT_UNIT_INTERFACE </STRONG><BR>$ VIT_UNIT_INTERFACE NAME <BR>[] [PUSHKA] <BR>&amp; UNITS <BR>+ / <BR>^ VIT_UNIT_INTERFACE PUSHKA <BR>= ???? so it knows that it needs to use a different interface? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>WALLOBJECT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Seen in CI walls <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>WATER <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>*<STRONG> WATERROUND </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>WATERCHECKDIST</STRONG> <BR>$ watercheckdist2 watercheckdist1 <BR>[] / <BR>&amp; BUILDINGS <BR>+ PORT <BR>^ WATERCHECKDIST 220 450 <BR>= Distance a harbour can be build near water? <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>WAVES <BR></STRONG>$ waves WaveDZ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= 2d Wave ID, A wave ID needs to be linked to weapon.ads and then the co-ordinates of appearance needs to be placed in an md using this command.<BR>&nbsp;&nbsp; Found mostly used in AC.<BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>WEAPON </STRONG><BR>$ weapon <BR>[] [WEAPON 0 FireBolt] ( Rocket) <BR>&amp; UNITS &amp; BUILDINGS <BR>+ <BR>^ <BR>= Sets the weapon(s) a unit/building uses. The number refers to the index if multiple weapons are used and is referred upon in various weapon entries such as range, attack, damage,...See WEAPON.NDS &amp; WEAPON.ADS for a full listing of all weapons. <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>WEAPONKIND</STRONG> <BR>$ weaponkind <BR>[] [WEAPONKIND 0 MEDIK] <BR>&amp; UNITS &amp; BUILDINGS <BR>+ <BR>^ <BR>= Weapon kind is first defined in Nres.dat and then in the md files. eg: magical can be added to Nres.dat and an icon can be set there, this weapon kind can now<BR>&nbsp;&nbsp; be added to all units. Corresponding defense can also be setup against the weaponkind under PROTECTION.<BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>*<STRONG> WEAPONINSECTOR </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ???? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>ZALP <BR></STRONG>$ maxzalp n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ ZALP 40 <BR>= Number of shots a unit can fire before having to reload. 40 in this case <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>ZPOINTS</STRONG> <BR>$ DstZpoint SrcZpoint <BR>[] <BR>&amp; <BR>+ <BR>^ ZPOINTS 3 3 <BR>= ???? </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>3DBARS </STRONG><BR>$ 3DBARS n n <BR>[] / <BR>&amp; UNNITS &amp; BUILDINGS <BR>+ / <BR>^ 3DBARS 4 260 420 250 130 120 147 775 200 500 120 560 440 500 350 120 550 775 200 300 120 (BldKre.MD) <BR>= This makes the building have a shape so cannonballs can kill it <BR>
+<HR>
+</DIV>
+<DIV>* Empty <BR>$ Empty <BR>[] Empty <BR>&amp; Empty <BR>+ Empty <BR>^ Empty <BR>= Empty </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>[END OF MD STRINGS]</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;</DIV>

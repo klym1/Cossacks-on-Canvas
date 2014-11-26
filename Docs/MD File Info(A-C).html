@@ -1,0 +1,315 @@
+<DIV align=center><STRONG><SPAN style="COLOR: #ffd700; FONT-SIZE: 18pt">MD File Info</SPAN></STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Under Construction</STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Alphabetical Index : <BR></STRONG>A-C&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-232">D-F</A>&nbsp; &nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-233">G-L</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-234">M-O</A>&nbsp; &nbsp;<A href="http://cossacksworld.ucoz.co.uk/index/0-236">P-S</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-237">T-Z</A> </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;</DIV>
+<DIV align=left><STRONG>Symbol&nbsp;&nbsp;Description</STRONG>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</DIV>
+<DIV align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;* &nbsp;String&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;$ &nbsp;Parameter(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;[] &nbsp;Possible SubParameter(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&amp; &nbsp;Usage&nbsp;&nbsp;(Units -Buildings)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;+ &nbsp;Combination with other string(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </DIV>
+<DIV align=left>&nbsp;^ &nbsp;Example / (Name.MD)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;= &nbsp;Explanation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;{}&nbsp;Possible Assertion Error Description(s)<BR>&nbsp;</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center>&nbsp;</DIV>
+<DIV>* <STRONG>ABILITY</STRONG> <BR>$ ability name <BR>[] </DIV>
+<DIV>[Attack+1] <BR>[Shield+1] <BR>[Shield-1toEnemy] <BR>[Anm1] <BR>[Anm2] <BR>[Anm3] <BR>[FOLLOWBRIGADE] <BR>[CANNONAUTOSHOT] <BR>&amp; BUILDINGS &amp; UNITS<BR>+ / <BR>^ ABILITY Anm2 /(SwiW.MD) ABILITY FOLLOWBRIGADE (TurPop.MD) <BR>= Defines the ability of various units. You can set these up or see specification in the UnitAbility Editor under the CTRL +E menu in the map editor. These settings are stored in Data\UnitsAbility\BASE.UA.XML. For more specifications on this see the <A href="http://cossacksworld.ucoz.co.uk/index/0-235">Unit Ability Editor </A></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>*<STRONG> ADDHDIR </STRONG><BR>$ height direction <BR>[] <BR>&amp; <BR>+ <BR>^ ADDHDIR #DEATH 0 -64 (artpusR.md) <BR>= ???? </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ADDSHOTRADIUS</STRONG> <BR>$ addshotradius <BR>[] / <BR>&amp; <BR>+ / <BR>^ ADDSHOTRADIUS 600 <BR>= shows up as a red zone around the building</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ADD_ATTACK_RADIUS </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Extension of attack radius<BR>{} '%s,line %d : Attack type index in ADD_ATTACK_RADIUS is too big.',0</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ADDSECTION</STRONG> <BR>$ Index Gp AddPts Empty x y Stage1 x y Ready x y Dead x y&nbsp;<BR>[] <BR>&amp; <BR>+ NDS Files , STAGELOCKPOINTS<BR>^ ADDSECTION 0 0 25000 <BR>-1 296 513 <BR>9 296 513 <BR>10 296 513 <BR>11 296 513 <BR>= Used for adding graphics parts to a building trough an upgrade, defined in the .nds file under [STAGEDEPENDANT],[UPGRADESTAGE],... <BR>{} %s,line %d : ADDSECTION : Too large stage index',0 <BR>{} %s,line %d : ADDSECTION : Not enough or wrong parameters',0</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>AISHIP</STRONG> <BR>$ AI_PrefferredATTR_Max AI_PreferredATTR_Min aiship <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ AISHIP B 0 6000 <BR>= ShpFregat.md ???</DIV>
+<DIV>
+<HR>
+* &nbsp;<STRONG>ALIGN_WITH_3POINTS<BR></STRONG>$ &nbsp;n n n&nbsp;&nbsp; n n n&nbsp;&nbsp; n n n<BR>[] &nbsp;/<BR>&amp; &nbsp;Buildings<BR>+ &nbsp;/<BR>^ &nbsp;ALIGN_WITH_3POINTS 370 706 0&nbsp;&nbsp; 689 668 0&nbsp;&nbsp; 537 329 292<BR>= &nbsp;Aligning of buildings with the landscape. You can visually set these up with the building aligning editor under the contrel+E menu ingame. It will automatically save these 3D points to the md file. The n points themself refer to the coordinates.(x, y, z)</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ANIMAL <BR></STRONG>$ ANIMAL <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ ANIMAL <BR>= Subtype of USAGE</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ANIMATION1</STRONG><BR>$&nbsp;anim mesh<BR>[]&nbsp;/<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ANIMATION2<BR></STRONG>$&nbsp;P_End P_Start P_File<BR>[]&nbsp;/<BR>&amp;<BR>+<BR>^<BR>= ?<BR>
+<HR>
+*<STRONG> ANMEXT</STRONG> <BR>$ period scale sub_animation <BR>[] <BR>&amp; <BR>+ <BR>^ ANMEXT #STANDLO #TEMP1 180 70 20 1.0 20000 (from Alexander AllArs.md) <BR>= ???</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ANMSUMM<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ANMSH<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ANMSHIFT</STRONG> <BR>$ ANMSHIFT #ANIMATION n n <BR>[] / <BR>&amp; <BR>+ <BR>^ ANMSHIFT #WORK -90 -118 (bochka.md) <BR>= ???</DIV>
+<DIV>
+<HR>
+<BR>* <STRONG>ARCHER <BR></STRONG>$ / <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ ARCHER <BR>= Unitkind</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ARMRADIUS</STRONG> <BR>$ armradius n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ ARMRADIUS 150 <BR>= ??</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ARTDEPO</STRONG> <BR>$ ARTDEPO n n n n n <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ ARTDEPO 2 1 1 2 2 <BR>= Sets the maxamount of a building for producing artillery. Slightly different then in AC/CI where you only have 4 parameters. Here we find 5 for the various type's of artillery. 2 Heavy Cannons, 1 Howitsers, 1 Light Cannon, 2 Limbers and 2 Rockets</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ARTPODGOTOVKA</STRONG><BR>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ATTPREVIEW1</STRONG> <BR>$ ATTPREVIEW1 n <BR>[] / <BR>&amp; <BR>+ / <BR>^ ATTPREVIEW1 450 <BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>ATTPREVIEW2 </STRONG><BR>$ ATTPREVIEW2 n <BR>[] / <BR>&amp; <BR>+ / <BR>^ ATTPREVIEW2 200 <BR>= ?</DIV>
+<DIV>
+<HR>
+* &nbsp;<STRONG>ATTACK_ANGLES<BR></STRONG>$&nbsp;AngleUp AngleDN<BR>[]<BR>&amp;<BR>+<BR>^&nbsp;ATTACK_ANGLES&nbsp; 0 -255 255&nbsp;&nbsp;&nbsp; <BR>=<BR>{}&nbsp;'%s,line %d : Attack type index in SHOT_ANGLE is too big.',0</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ATTACK_PAUSE <BR></STRONG>$ ATTACK_PAUSE n n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ ATTACK_PAUSE 1 800 <BR>= Pause between attacks. The one refers to the WEAPON , the 800 is the time reference <BR>{} '%s,line %d : Attack type index in ATTACK_PAUSE is too big.',0</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>ATTACK_SOUND<BR></STRONG>$ ATTACK_SOUND Name<BR>[] /<BR>&amp; UNITS&nbsp; &amp; BUILDINGS<BR>+ /<BR>^<BR>= Sound to be played on attacking. For a list of all sound name's, go to the map editor, press CTRL + W + S. This way you access the Weaponsystem for sounds. </DIV>
+<DIV>
+<HR>
+* <STRONG>ATTACK_RADIUS</STRONG> <BR>$ attack_radius1 attack_radius2 <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ ATTACK_RADIUS 1 0 900 <BR>= Radius of attack (minimum-maximum). The 1 refers to the WEAPON index. <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ATTMASK</STRONG> <BR>$ attmask mask <BR>[] <BR>&amp; <BR>+ <BR>^ ATTMASK 2 2 BUILDING WOOD</DIV>
+<DIV>ATTMASK 1 2 BUILDING WOOD&nbsp;<BR>= what affects weapons</DIV>
+<DIV>{} '%s, Line: %d :ATTMASK: Unknown matherial:%s',0</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>AUTO_NO_ATTACK</STRONG><BR>$ /<BR>[] <BR>&amp;<BR>+<BR>^<BR>= not attacking automatically</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>AUTO_STAND_GROUND</STRONG><BR>$ /<BR>[]<BR>&amp;<BR>+<BR>^<BR>= auto stand ground</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>AUTOROTATE<BR></STRONG>$&nbsp;autorotateR autorotateL<BR>[]<BR>&amp;<BR>+<BR>^<BR>=</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BARABAN</STRONG> <BR>$ BARABAN <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ BARABAN <BR>= Drummer designation. Unitkind</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>BATTLEFORCE<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BIGICON</STRONG> <BR>$ BigIconIndex bigicon <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ BIGICON Interf3\Units_Eng 11 <BR>= Set's the Big Unit Icon ( or building) in the interface</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BIGFIREWEAP</STRONG> <BR>$ BIGFIREWEAP Folder\.g17 Frame Nr <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ BIGFIREWEAP Interf3\BigWeapon 7 <BR>= Sets the graphic for the weapon display in the interface. 7 is the 8th frame in the BigWeapon.g17 (.g16) file.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BIGCOLDWEAP</STRONG> <BR>$ BIGCOLDWEAP Folder\.g17 Frame Nr <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ BIGCOLDWEAP Interf3\BigWeapon 0 <BR>= Sets the graphic for the weapon display in the interface. O is the first frame in the BigWeapon.g17 (.g16) file.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BOIDSMOVING</STRONG> <BR>$ BoidsMovingWeight BoidsMovingMinDist <BR>[] <BR>&amp; <BR>+ <BR>^ BOIDSMOVING 16 5 <BR>= ??</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BOMB </STRONG><BR>$ BOMB 600 4000 <BR>[] / <BR>&amp; / <BR>+ EXPLOSIVE <BR>^ BOMB 600 4000 <BR>= Used in Bochka.md (bomb sappers/grenadiers can place near a building) , i presume it defines radius and damage, or vice versa</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BORNPOINTS</STRONG> <BR>$ BORNPOINTS n n n <BR>[] / <BR>&amp; BUILDINGS <BR>+ CONCENTRATOR <BR>^ <BR>= where the unit will appear if it comes out of the building. Born Points are points you want to declare as accessable as these are the points a unit will follow if it is created and exits the building ( or vice versa, enters or STORMS the building). The first number is the amount of x &amp; y positions in pairs, then followed by those coordinates -x,y (in 16x8 blocks) relative to the top left hand corner of the picture area. <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>BORNPOINTS2 <BR></STRONG>$ bornpoints2 n n n <BR>[] / <BR>&amp; BUILDINGS <BR>+ CONCENTRATOR2 <BR>^ BORNPOINTS2 2 562 401 745 537 <BR>= Second Set of Born Points for 2 entrances eg. Note that BORNPOINTS2 does not require BORNPOINTS.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BORN_BEHIND_BUILDINGS</STRONG> <BR>$ BORN_BEHIND_BUILDING <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ BORN_BEHIND_BUILDING <BR>= the units gets born behind the building. Alternative for BORNPOINTS. Used for HGU.md OBOZ.MD ( packhorse) eg</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>BORN_SOUND</STRONG> <BR>$ BORN_SOUND NAME <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ <BR>= Sound used when unit is born. Kinda annoying to have a sound always playing on creating units.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>BRIGADEWAITINGCYCLES<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>=</DIV>
+<DIV>
+<HR>
+* <STRONG>BRANDOMPOS </STRONG><BR>$ brandompos n <BR>[] / <BR>&amp; <BR>+ <BR>^ BRANDOMPOS 4 <BR>= Random position(?)</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BRANDOMSPEED </STRONG><BR>$ brandomspeed n <BR>[] <BR>&amp; <BR>+ <BR>^ BRANDOMSPEED 14 <BR>= Random speed on terrain ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>*<STRONG> BREAKANIMATION</STRONG> <BR>$ breakanimation #ANIMATION <BR>[] / <BR>&amp; UNITS <BR>+ <BR>^ BREAKANIMATION #REST <BR>= ???</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BREFLECT </STRONG><BR>$ BREFLECT <BR>[] / <BR>&amp; <BR>+ / <BR>^ BREFLECT <BR>= ?? Building reflection in water? 
+<HR>
+</DIV>
+<DIV>* <STRONG>&nbsp;BUILDING</STRONG><BR>$&nbsp;/<BR>[]&nbsp;/<BR>&amp;&nbsp;BUILDING<BR>+&nbsp;/<BR>^&nbsp;/<BR>=&nbsp;Designates that this md is a building. Other similar entries are &nbsp;PEASANT<BR>&nbsp;&nbsp;WALL<BR>&nbsp;&nbsp;TOWER<BR>&nbsp;&nbsp;<BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>&nbsp;BUILDBAR</STRONG><BR>$<BR>[]<BR>&amp;<BR>+<BR>^&nbsp;BUILDBAR&nbsp; -28 78&nbsp; 102 70<BR>=&nbsp;The texture below the building, how large it is</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>BUILDLOCKPOINTS</STRONG><BR>$&nbsp;buildlockpoints BlockY BlockX<BR>[]<BR>&amp;<BR>+<BR>^<BR>=&nbsp;In game switch on Q ( CI) to see a grid over the building.&nbsp; It uses a 16x8 grid </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>BUILDPOINTS</STRONG><BR>$&nbsp;buildpoints BuildPtY BuildptX<BR>[]<BR>&amp;<BR>+<BR>^<BR>=&nbsp;where the peasants will sit to show their building animation.</DIV>
+<DIV>
+<HR>
+<BR>* &nbsp;<STRONG>BUILDSTAGES<BR></STRONG>$&nbsp;buildstages<BR>[]&nbsp;/<BR>&amp;&nbsp;BUILDINGS&amp;UNITS<BR>+&nbsp;/<BR>^&nbsp;BUILDSTAGES 500<BR>=&nbsp;Time to for constructing a building/unit in GT</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>BUILDNEARBUILDING</STRONG> <BR>$ BUILDNEARBUILDING n <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ BUILDNEARBUILDING 100 <BR>= Sets a building to a state where it can be build close to another building, eg, bochka.md ( bomb)<BR>
+<HR>
+<BR>* <STRONG>BUILDHOTKEY </STRONG><BR>$ BUILDHOTKEY n <BR>[] [ALL KEYBOARD KEYS APPLICABLE] <BR>&amp; BUILDINGS &amp; UNITS <BR>+ / <BR>^ BUILDHOTKEY J <BR>= Sets the hotkey for producing a unit, building</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>CANBUILD</STRONG> <BR>$ CANBUILD <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ CANBUILD <BR>=</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANBEINFOCUSOFFORMATION</STRONG> <BR>$ CANBEINFOCUSOFFORMATION <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ CANBEINFOCUSOFFORMATION <BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANBEKILLEDINSIDE <BR></STRONG>$ CANBEKILLEDINSIDE <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ CANBEKILLEDINSIDE <BR>= Sets a unit to a state that it can be killed inside a building. ( AC stuff)</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANBECAPTUREDWHENFREE <BR></STRONG>$ CANBECAPTUREDWHENFREE <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ CANBECAPTUREDWHENFREE <BR>= For buildings, when free, it can be captured</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CANKILL</STRONG><BR>$&nbsp;cankill n object(matherial)<BR>[]&nbsp;AIR<BR>&nbsp;BODY<BR>&nbsp;BUILDING<BR>&nbsp;IRON<BR>&nbsp;STENA (?)<BR>&nbsp;STONE<BR>&nbsp;WOOD<BR>&amp;&nbsp;To define what type of matherials this unit can damage and these on their turn need to be defined on matherials on the related ~.MD file<BR>+&nbsp;MATHERIALS<BR>^&nbsp;CANKILL 1 BUILDING<BR>=&nbsp;This unit can damage (kill) other objects that consist of this matherial. For buildings that should not suffer damage like the TempCommandCenter, IRON is used in its MATHERIAL description<BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANNONLIKEMOTION </STRONG><BR>$ CANNONLIKEMOTION <BR>[] / <BR>&amp; ARTILLERY <BR>+ / <BR>^ CANNONLIKEMOTION <BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANSHOOT</STRONG> <BR>$ CANSHOOT <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ CANSHOOT <BR>= It can shoot !!</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANSTORM</STRONG> <BR>$ CANSTORM <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ CANSTORM <BR>= It can storm buildings</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>CANSTOPBUILD</STRONG> <BR>$ CANSTOPBUILD <BR>[] / <BR>&amp; <BR>+ / <BR>^ CANSTOPBUILD <BR>= Stôpping when running out of resources?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CANTCAPTURE</STRONG> <BR>$ CANTCAPTURE <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ CANTCAPTURE <BR>= Sets a unit to NOT being able to capture buildings that have the CAPTURE string in the md file.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CAPTURE</STRONG><BR>$&nbsp;/<BR>[]&nbsp;/<BR>&amp;&nbsp;BUILDINGS &amp; UNITS<BR>+&nbsp;/<BR>^&nbsp;CAPTURE<BR>=&nbsp;Indicate's that this unit/building if not guarded or accompanied by at least 1 allied armed soldier can be captured by the enemy. 
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CATEGORY<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>CHECKPOINTS</STRONG> <BR>$ CheckY CheckX <BR>[] / <BR>&amp; BUILDINGS <BR>+ LOCKPOINTS <BR>^ CHECKPOINTS 117 1 10 1 11 1 12 2 9 2 10 , etc ... <BR>= has to be the same as LOCKPOINTS. I assume that checkpoints points to an area which must be clear before the building can be build. Again in x &amp; y pairs.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CHECKWATER</STRONG><BR>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= Checks the distance to water, see WATERCHECKDIST</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>COLORVARIATION </STRONG><BR>$ colorvariation n <BR>[] / <BR>&amp; <BR>+ <BR>^ COLORVARIATION 16 <BR>= ???Seems to be a lot the same value.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>&nbsp;COMMAND</STRONG><BR>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ???</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>COMMANDCENTER</STRONG> <BR>$ / <BR>[] / <BR>&amp; Buildings ( Officers) <BR>+ Also see GLOBALCOMMANDCENTER<BR>^ COMMANDCENTER <BR>= Building (unit) will act as a com center for rallying troops.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>COMPLEXOBJECT </STRONG><BR>$ complexobject n <BR>[] COMPLEXOBJECT RAKETA <BR>COMPLEXOBJECT OBOZ <BR>&amp; UNITS <BR>+ MOTIONSTYLE COMPLEXOBJECT <BR>^ COMPLEXOBJECT OBOZ <BR>= ??? see Complexobject\complexobject.dat(xml)?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CONCENTRATOR<BR></STRONG>$&nbsp;Concentrator ConcPtY ConcPtX<BR>[]&nbsp;/<BR>&amp;&nbsp;BUILDINGS<BR>+&nbsp;BORNPOINTS<BR>^&nbsp;CONCENTRATOR&nbsp;&nbsp;&nbsp; 2 8 51 15 50<BR>=&nbsp;Point of origin where units will come out of building. Evidently works together with BORNPOINTS</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CONCENTRATOR2<BR></STRONG>$&nbsp;Concentrator2 ConcPtY ConcPtX<BR>[]&nbsp;/<BR>&amp;&nbsp;BUILDINGS<BR>+&nbsp;BORNPOINTS2<BR>^&nbsp;CONCENTRATOR2&nbsp;&nbsp;&nbsp; 2 532 367 421 302 (EgpArs.MD)<BR>=&nbsp;Point of Origin for BORNPOINTS2</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>COSTPERCENT<BR></STRONG>$&nbsp;costpercent n<BR>[]&nbsp;/<BR>&amp;&nbsp;UNITS &amp; BUILDINGS<BR>+&nbsp;/<BR>^&nbsp;COSTPERCENT 150<BR>=&nbsp;This will increase the price of the next unit by x % (150 in example). Note that all gsc game's suffer from something like a max price inflation cap. Depending on the initial cost and price inflation, the price will suddenly not increase anymore, this goes for all buildings and units. More experience players who have played epic game's know this, but you gotta test this for yourself to avoid unwanted results. You can ofcourse increase this to a ridiculous amount of lets say 99999999999999 or a negative value for creative use of this string.</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>COST_FOOD<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>COST<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>*<STRONG> &nbsp;CRAFTPOINTS<BR></STRONG>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?see AC</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* &nbsp;<STRONG>CRAFTPOINTS2</STRONG><BR>$<BR>[]<BR>&amp;<BR>+<BR>^<BR>= ?</DIV>
+<DIV>
+<HR>
+</DIV>

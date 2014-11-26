@@ -1,0 +1,137 @@
+<DIV align=center><STRONG><SPAN style="COLOR: #ffd700; FONT-SIZE: 18pt">MD File Information</SPAN></STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Under Construction</STRONG></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV align=center><STRONG>Alphabetical Index : </STRONG><BR><A href="http://cossacksworld.ucoz.co.uk/index/0-193">A-C</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-232">D-F</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-233">G-L</A>&nbsp; &nbsp;M-O&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-236">P-S</A>&nbsp;&nbsp; <A href="http://cossacksworld.ucoz.co.uk/index/0-237">T-Z</A> </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>MATHERIAL</STRONG> <BR>$ matherial type <BR>[] BODY <BR>STONE <BR>AIR <BR>IRON <BR>WOOD <BR>&amp; BUILDINGS &amp; UNITS <BR>+ CANKILL <BR>^ MATHERIAL 1 BODY <BR>= Designates what type of material a building unit consists of. Its enemy will use the CANKILL string similar to this. Enemy can consist of multiple CANKILL type's <BR>
+<HR>
+</DIV>
+<DIV>{} <BR>* <STRONG>MATHERIAL0 </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? For a second type? but wouldnt you specify that under the first MATHERIAL string with multiple entries? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MESSAGE</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Long Message of Unit ? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MFARM</STRONG> <BR>$ mfarm n <BR>[] / <BR>&amp; BUILDINGS <BR>+ / <BR>^ MFARM 50 <BR>= How many housing this building provides ( living spaces) <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>*<STRONG> MAXATTACKERS </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Maximum amount of attackers? For going inside a building ( storming)? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MAXINDEPO</STRONG> <BR>$ MAXINDEPO n n <BR>[] / <BR>&amp; UNITS <BR>+ ARTDEPOT <BR>^ MAXINDEPO 4 2 <BR>= This sets which type this art belongs to under the ARTDEPOT string, in this case its the 4th entry (Rocket) in ARTDEPOT and it can has max 2 units of this type, which is aswell specified in the ARTDEPOT string <BR>{} 'first parameter must be&lt;5',0 <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MEDIA</STRONG> <BR>$ <BR>[] </DIV>
+<DIV>HIAIR <BR>LOWAIR <BR>WATER <BR>LAND <BR>&amp; <BR>+ <BR>^ <BR>= Media Overlay? and to what purpose? <BR></DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>MINICON <BR></STRONG>$ MinIconIndex minicon <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ MINICON Interf3\Units_Eng_mini 11 <BR>= Sets the icon for buildings &amp; units in the production/build menu of peasants/buildings. 11 is the 12th frame in the Units_Eng_Mini.g17 file. <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MinDistanceToEnterRoad</STRONG> <BR>$ MinDistanceToEnterRoad n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ MinDistanceToEnterRoad 1500 <BR>= By default this is set in the EngineOptions or GameOptions under ctrl+E editor list, but i presume you can specify a different setting here. 1500 is a lot, its taken from a horse.md <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MinDistForLineFormations <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? Distance between units, between formations, between formation &amp; road ??? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* <STRONG>MinTOpDistanceToEnterRoad</STRONG> <BR>$ MinTopDistanceToEnterRoad n <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ MinTopDistanceToEnterRoad 1500 <BR>= By default this is set in the EngineOptions or GameOptions under ctrl+E editor list, but i presume you can specify a different setting here <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* <STRONG>MISSINSIDEUNITSDAMAGE</STRONG> <BR>$ MISSINSIDEUNITSDAMAGE n <BR>[] <BR>&amp; <BR>+ POSPOINTS <BR>^ MISSINSIDEUNITSDAMAGE 50 <BR>= Sets damage when units are inside? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>MISSONHEIGHT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>MREGENERATION </STRONG><BR>$ MREGENERATION n <BR>[] / <BR>&amp; <BR>+ <BR>^ MREGENERATION 100 <BR>= ???(from Aldub.md-alexander-ship) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>MOREANIMATION</STRONG> <BR>$ model <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? (for .c2m ?) <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MOTIONSTYLE <BR></STRONG>$ motionstyle <BR>[] FLY <BR>SINGLESTEP <BR>NEWSHEEPS <BR>ROTATE&amp;MOVE <BR>COMPLEXROTATE <BR>SHEEPS <BR>SLOWROTATE <BR>FASTROTATE&amp;MOVE <BR>&amp; UNITS <BR>+ <BR>^ MOTIONSTYLE SLOWROTATE /(ArtGau.MD) <BR>= This unit will follow the above determined motion style ( this case a slow rotation for the cannon) <BR>
+<HR>
+</DIV>
+<DIV>*<STRONG> MOTION_ON_ROAD_SOUND </STRONG><BR>$ MOTION_ON_ROAD_SOUND SOUNDNAME <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ MOTION_ON_ROAD_SOUND PEHOTA_GO_ONROAD <BR>= Sound used when formation goes on road. In this case PEHOTA_GO_ONROAD <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MOVEBREAK <BR></STRONG>$ movebreak <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? Break in animation on moving? <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>MULTIWEAPON</STRONG> <BR>$ MULTIWEAPON n n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ MULTIWEAPON 417 494 24 13 368 520 403 518 441 520 476 520 514 519 549 516 585 515 620 511 654 510 533 491 568 490 604 488 641 484 <BR>= multishots, sets points for multiple shots origin points <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>&nbsp;<BR>* <STRONG>MULTIWEAPON2</STRONG> <BR>$ MULTIWEAPON2 n n <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ WEAPON <BR>^ <BR>= secondary weapon, same as MULTIWEAPON <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NAEMNIK</STRONG> <BR>$ NAEMNIK <BR>[] / <BR>&amp; UNITS <BR>+ RESCONSUMER <BR>^ NAEMNIK <BR>= mercenary ( used with RESCONSUMER-if you run out of gold, you will have a mutiny) <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NAME</STRONG> <BR>$ NAME NAME <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ / <BR>= Name that will be used to call upon in the ~.NDS under section [MEMBERS] and nmlist.txt(or any .txt for that matter) <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NEVERCAPTURE</STRONG> <BR>$ NEVERCAPTURE <BR>[] / <BR>&amp; UNITS &amp; BUILDINGS <BR>+ / <BR>^ NEVERCAPTURE <BR>= The building can never be captured? Why not specify at all, by default you can't capture,so? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV><BR>* <STRONG>NEWSHEEPS</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= Some type of category? Seen in Cossacks I aswell. <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NEDORAZVITOE</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>NIKAKIXMAM</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>*<STRONG> NO25 <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ?? <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOFARM <BR></STRONG>$ / <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ / <BR>= Indicates that this unit does not count towards the population amount ( mainly used for animals,...) <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NO_HUNGRY </STRONG><BR>$ / <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ / <BR>= Indicates that this unit will not consume food as defined in NRES.DAT under RES/UNIT <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOFULLDESTRUCT </STRONG><BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOPAUSEDATTACK <BR></STRONG>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ? No pause between attacks? Weapon parameters required? (index) <BR>{} </DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOINFINITY </STRONG><BR>$ NOINFINITY <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ NOINFINITY <BR>= Sets units to no infinite production in buildings ( drummers? officers?,...) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOTSELECTABLE</STRONG> <BR>$ NOTSELECTABLE <BR>[] / <BR>&amp; UNITS&amp;BUILDINGS <BR>+ / <BR>^ NOTSELECTABLE <BR>= Sets a building ( unit) to a non selectable state ( used for GORBUILDINGS in map edit eg) <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>NOMORALE</STRONG> <BR>$ NOMORALE <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ NOMORALE <BR>= Unit has no morale ( priests eg) <BR>{} <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>OFFICER</STRONG> <BR>$ OFFICER <BR>[] / <BR>&amp; UNITS <BR>+ / <BR>^ OFFICER <BR>= Subtype of USAGE string. Set's officer status <BR>{}</DIV>
+<DIV>
+<HR>
+</DIV>
+<DIV>* <STRONG>ORDER_SOUND </STRONG><BR>$ order_sound <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= <BR>
+<HR>
+</DIV>
+<DIV>* <STRONG>OPPOSIT</STRONG> <BR>$ <BR>[] <BR>&amp; <BR>+ <BR>^ <BR>= ??? <BR>{} </DIV>
+<HR>
