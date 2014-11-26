@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 using Common;
+using MDParser;
 
 namespace ConvertAll
 {
@@ -24,6 +26,13 @@ namespace ConvertAll
 
         private static readonly float[] dashValues = { 5, 5 };
 
+        private readonly static Color color = Color.Red;
+
+        private readonly static Brush brush = new SolidBrush(color);
+        private readonly static Pen pen = new Pen(color);
+        
+        private readonly static Font font  = new Font("Verdana", 10);
+
         private static void Main(string [] args)
         {
 //            var allDirectories = Directory
@@ -36,11 +45,14 @@ namespace ConvertAll
             }
 
            // Verify.JoinAllImagesAndAlphasFromDirectory(Path.Combine(BaseDirectory, "GUSS.gp"), OutputDirectory);
-         
 
-            var joinedImagesOutput = Directory
-               .GetDirectories(OutputDirectory)
-               .Where(it => it.Contains("GUS"));
+            var unit = "GRE";
+
+            var mdParser = new MDFileParser(Path.Combine(@"..\..\..\..\MD\", unit + ".md"));
+
+            var j = mdParser.FindUserLCShadow();
+
+            var joinedImagesOutput = j;
 
             if (!Directory.Exists(OutputDirectory))
             {
@@ -57,9 +69,15 @@ namespace ConvertAll
             SaveInfo(SpriteInfos, Path.Combine(SpritesDirectory, "sprites-info.json"));
         }
 
-        private static void CreateSpritesInImagesPng(string directory)
+        private static void CreateSpritesInImagesPng(IList<string> directory)
         {
-            var c = Directory.GetFiles(directory, "*.png").Select(it =>
+            var spriteName = directory[2].ToUpperInvariant();
+
+            var mirrorOffset = Int32.Parse(directory[4])*(-1);
+
+            var spritePath = Path.Combine(OutputDirectory, spriteName);
+
+            var c = Directory.GetFiles(spritePath, "*.png").Select(it =>
             {
                 var newi = (Bitmap) Image.FromFile(it);
 
@@ -68,41 +86,22 @@ namespace ConvertAll
                     Content = newi,
                 };
             }).ToArray();
-
-           
+            
             var maxHeight = c.Max(it => it.Content.Height);
             
-          //  var ExtendedBitmaps = GetExtendedBitmaps(c, maxWidth, maxHeight);
-
-            int jjj = 62;
-
-            if (directory.Contains("SWRH"))
-            {
-                jjj = 92;
-            } else if (directory.Contains("GUSH"))
-            {
-                jjj = 95;
-            }
-            else
-            {
-                jjj = 65;
-            }
+            var maxWidth = mirrorOffset * 2;
+            var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, mirrorOffset);
             
-            var maxWidth = jjj * 2;
-           var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, jjj);
-
-            var unitName = directory.Split('\\')[directory.Count(it => it == '\\')];
-
             if (!Directory.Exists(SpritesDirectory))
             {
                 Directory.CreateDirectory(SpritesDirectory);
             }
 
-            SaveBitmap(bitmap, Path.Combine(SpritesDirectory, unitName + ".png"));
+            SaveBitmap(bitmap, Path.Combine(SpritesDirectory, spriteName + ".png"));
             
             var spriteInfo = new SpriteInfo()
             {
-                UnitName = unitName,
+                UnitName = spriteName,
                 SpriteHeight = maxHeight,
                 SpriteWidth = maxWidth,
                 NumberOfFrames = c.Length / 9,
@@ -123,27 +122,13 @@ namespace ConvertAll
 
             var graphics = Graphics.FromImage(newimage);
             
-            var pen = new Pen(Color.Green);
-
-            pen.DashPattern = dashValues;
-
-            var brush = new SolidBrush(pen.Color);
-            var brush2 = new SolidBrush(Color.Red);
-            var brush3 = new SolidBrush(Color.Orange);
-
-            var font = new Font("Verdana", 10);
-
             for (int z = 0; z < 9; z++)
             {
                 for (int i = z, j = 0; i < c.Length; i += 9, j++)
                 {
-//                    var l = ContentStartPixelIndexByXFromLeft(c[i].Content);
-//                    var r = ContentStartPixelIndexByXFromRight(c[i].Content);
-                    
                     if (IsDebug)
                     {
-                      //  graphics.FillRectangle(true ? brush2 : brush3, z * maxWidth, maxHeight * j, c[i].Content.Width, c[i].Content.Height);
-                       // graphics.FillRectangle(brush, z * maxWidth + l, maxHeight * j, r - l + 1, c[i].Content.Height);
+                        graphics.FillRectangle(brush, z * maxWidth, maxHeight * j, c[i].Content.Width, c[i].Content.Height);
                     }
 
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
@@ -162,31 +147,56 @@ namespace ConvertAll
 
         private static void DrawFlippedImage(B c, int maxWidth, int maxHeight, Graphics graphics, int z, int j, int jjj)
         {
-            c.Content = TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, jjj);
+            TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, jjj);
 
             if (IsDebug)
             {
-
-              //  graphics.FillRectangle(brush2, (-z + 16) * maxWidth, maxHeight * j, c.Content.Width, c.Content.Height);
-              //  graphics.FillRectangle(brush, (-z + 16) * maxWidth + l, maxHeight * j, r - l + 1, c.Content.Height);
+                graphics.FillRectangle(brush, (-z + 16) * maxWidth, maxHeight * j, c.Content.Width, c.Content.Height);
             }
             
             graphics.DrawImage(c.Content, (-z + 16) * maxWidth, maxHeight * j);
         }
-        
-        private static Bitmap TranslateAllPixelsToRight(Bitmap bitmap, int maxmwidth, int maxHeight, int jjj)
+
+        static void TranslateAllPixelsToRight(Bitmap image, int maxmwidth, int maxHeight, int jjj)
         {
-            var newbitmap = new Bitmap(maxmwidth, maxHeight);
+            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width,
+              image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
+
+            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * image.Height];
+            IntPtr scan0 = imageData.Scan0;
+
+            Marshal.Copy(scan0, imageBytes, 0, imageBytes.Length);
             
-            for (int j = 0; j < bitmap.Height; j++)
-                    for (int i = 0; i < bitmap.Width; i++)
-                {
+            for (int i = 0; i < imageBytes.Length; i += 3)
+            {
+                //byte pixelR = imageBytes[i + 2];
+              //  byte pixelG = imageBytes[i + 1];
+                byte pixelB = imageBytes[i];
+                
+                
+               // imageBytes[i + 2] = pixelR;
+               // imageBytes[i + 1] = pixelG;
+                imageBytes[i] = pixelB;
+                
+            }
 
-                        newbitmap.SetPixel(2*jjj - i - 1, j,  bitmap.GetPixel(i, j));   
-                }
+            Marshal.Copy(imageBytes, 0, scan0, imageBytes.Length);
 
-            return newbitmap;
+            image.UnlockBits(imageData);
         }
+
+//        private static Bitmap TranslateAllPixelsToRight(Bitmap bitmap, int maxmwidth, int maxHeight, int jjj)
+//        {
+//            var newbitmap = new Bitmap(maxmwidth, maxHeight);
+//
+//            for (int j = 0; j < bitmap.Height; j++)
+//                for (int i = 0; i < bitmap.Width; i++)
+//                {
+//                    newbitmap.SetPixel(2*jjj - i - 1, j, bitmap.GetPixel(i, j));
+//                }
+//
+//            return newbitmap;
+//        }
         
         private static void SaveBitmap(Bitmap bitmap, string path)
         {
