@@ -29,7 +29,7 @@ function Unit(name){
 		this.currentCommand.Execute();
 
   		} else {
-  			this.SetState(0);
+  			//this.SetState(0);
   		}
 	} else {
   		this.currentCommand.Execute();
@@ -54,12 +54,28 @@ Unit.prototype.Turn45L = function(){
 	this.commands.push(command);
 };
 
+Unit.prototype.Rotate = function(){
+
+	var command = new Command({unit : this, callback : function(user, i){
+
+		user.n = i % 16;
+
+	}, finishConditions : function(user, i){
+		return i > 1000;
+	}});
+
+	this.commands.push(command);
+};
+
 Unit.prototype.Turn45R = function(){
 
 	var command = new Command({unit : this, callback : function(user){
+		
+		user.SetState((user.state++) % 14);
+
 		user.n--;
-	}, finishConditions : function(user){
-		return user.n < 1;
+	}, finishConditions : function(user, i){
+		return i > 100;
 	}});
 
 	this.commands.push(command);
@@ -85,19 +101,19 @@ Unit.prototype.go = function(N){
 		},
 
 		finishConditions: function(user, i){
-			return i >= 100;
+			return i >= 30;
 		},
 
 		init: function(user){
 
-			var stepsNumber = 100;
+			var stepsNumber = 102;
 
 			var cachedCoordinates = new Array(stepsNumber);
 
 			var initCoordinates = [user.x, user.y];
 
-			var dx = Math.cos((N + 4) * Math.PI/8);
-			var dy = Math.sin((N + 4) * Math.PI/8);
+			var dx = Math.cos((N + 4) * (Math.PI/8));
+			var dy = Math.sin((N + 4) * (Math.PI/8));
 			
 			for (var i = 0; i < cachedCoordinates.length - 1; i++) {
 			   cachedCoordinates[i] = [Math.round(initCoordinates[0] + dx * i * user.speed), 

@@ -10,7 +10,7 @@ namespace Common
 {
     public static class Verify
     {
-        public static string GetUnitNameFromGPPath(string path)
+        private static string GetUnitNameFromGPPath(string path)
         {
             var spriteMatch = Regex.Match(path, @"[^\\]+(?=.gp$)");
 

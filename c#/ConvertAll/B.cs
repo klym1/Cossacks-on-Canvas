@@ -3,11 +3,9 @@ using System.Drawing;
 
 namespace ConvertAll
 {
-    [DebuggerDisplay("{Width} {Height}")]
+    [DebuggerDisplay("{Content.Width} {Content.Height}")]
     public class B
     {
         public Bitmap Content { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
     }
 }
