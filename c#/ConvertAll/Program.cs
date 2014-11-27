@@ -17,19 +17,24 @@ namespace ConvertAll
     {
         private const string BaseDirectory = @"..\..\..\..\images\";
         private const string MDDirectory = @"..\..\..\..\MD\";
-//        private const string OutputDirectory = @"..\..\..\..\images_png\";
         private const string SpritesDirectory = @"..\..\..\..\sprites_png\";
-
         private static bool IsDebug { get; set; }
 
         private static void Main(string [] args)
         {
-            if (args.Length > 0)
-            {
-                IsDebug = args[0] == "--d";
-            }
+            var unit = "KRE";
 
-            const string unit = "SWR";
+            if (args.Length == 1)
+            {
+                if (args[0] == "--d")
+                {
+                    IsDebug = true;
+                }
+                else
+                {
+                    unit = args[0];
+                }
+            }
             
             var mdParser = new MdFileParser(Path.Combine(MDDirectory, unit + ".md"));
             
@@ -43,17 +48,31 @@ namespace ConvertAll
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 }, userLCId =>
             {
+
                 var sw = Stopwatch.StartNew();
 
-                var joinedBitmaps = CreateJoinedBitmaps(userLCId);
+                try
+                {
+                    var joinedBitmaps = CreateJoinedBitmaps(userLCId);
 
-                var grid = CreateSpritesInImagesPng(joinedBitmaps);
+                    var grid = CreateSpritesInImagesPng(joinedBitmaps);
 
-                results.Push(grid);
-                
-                Console.WriteLine("{0} - {1:g}",userLCId[1], sw.Elapsed);
+                    results.Push(grid); 
+                }
+                catch (FileNotFoundException e)
+                {
+                    Console.WriteLine("File not found: {0}", e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0}", e);
+                }
+                finally
+                {
+                    Console.WriteLine("{0} - {1:g}", userLCId[1], sw.Elapsed);
 
-                sw.Stop();
+                    sw.Stop();
+                }
             });
 
             SaveJsonAndBitmaps(results);
