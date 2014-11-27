@@ -1,50 +1,66 @@
+using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace Common
 {
     public class Helper
     {
+        public static byte[] getImageBytes(Bitmap image)
+        {
+            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width,
+                 image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
+
+            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * image.Height];
+            IntPtr scan0 = imageData.Scan0;
+
+            Marshal.Copy(scan0, imageBytes, 0, imageBytes.Length);
+
+            image.UnlockBits(imageData);
+
+            return imageBytes;
+        }
+        
+        public static int CartesianToArrayPosition(int x, int y, int width)
+        {
+            var result = y * width + x;
+
+            return result * 4;
+        } 
+
         public static Bitmap JoinImageAndAlpha(Bitmap image, Bitmap alpha)
         {
             var resultBitMap = new Bitmap(image.Width, image.Height);
 
-            for (int i = 0; i < image.Width - 1; i++)
-                for (int j = 0; j < image.Height - 1; j++)
-                {
-                    var oldPixel = image.GetPixel(i, j);
-                    var oldPixela = alpha.GetPixel(i, j);
+            var imageBytes = getImageBytes(image);
+            var alhpaBytes = getImageBytes(alpha);
 
-                    var newColor = Color.FromArgb(oldPixela.G, oldPixel.R, oldPixel.G, oldPixel.B);
+            BitmapData imageData = resultBitMap.LockBits(new Rectangle(0, 0, resultBitMap.Width,
+             resultBitMap.Height), ImageLockMode.ReadWrite, resultBitMap.PixelFormat);
 
-                    resultBitMap.SetPixel(i, j, newColor);
-                }
+            byte[] resultImageBytes = new byte[Math.Abs(imageData.Stride) * resultBitMap.Height];
+            IntPtr scan0 = imageData.Scan0;
+
+            Marshal.Copy(scan0, resultImageBytes, 0, resultImageBytes.Length);
+
+            var bytesPerPixel = 4;
+            int i = 0;
+            int j = 0;
+            int z = 0;
+            for (; i < resultImageBytes.Length ; i+=4, j+=3, z++)
+            {
+                resultImageBytes[i + 3] = alhpaBytes[z];
+                resultImageBytes[i + 1] = imageBytes[j+1];
+                resultImageBytes[i + 2] = imageBytes[j+2];
+                resultImageBytes[i + 0] = imageBytes[j];
+            }
+            
+            Marshal.Copy(resultImageBytes, 0, scan0, resultImageBytes.Length);
+
+            resultBitMap.UnlockBits(imageData);
 
             return resultBitMap;
-        }
-
-        public static Image GetMirrorReflectionByX(Bitmap image, int maxWidth, int maxHeight)
-        {
-            var bigImage = new Bitmap(maxWidth, maxHeight);
-
-            Graphics graphics = Graphics.FromImage(bigImage);
-
-            
-
-          for (int i = 0; i < image.Width/2 - 1; i++)
-                for (int j = 0; j < image.Height - 1; j++)
-                {
-                    var l = image.GetPixel(i, j);
-                    var r = image.GetPixel(image.Width - 1 - i, j);
-
-                    image.SetPixel(i, j, r);
-                    image.SetPixel(image.Width - 1 - i, j, l);
-                }
-
-          graphics.DrawImage(image, new Point(maxWidth - image.Width,0));
-
-            graphics.Save();
-
-            return bigImage;
         }
     }
 }

@@ -58,6 +58,7 @@ namespace Common
             }
 
             var newBitmap = Helper.JoinImageAndAlpha(spriteInfo.ImageBitmap, spriteInfo.AlphaBitmap);
+
             newBitmap.Save(outputDirectory + spriteInfo.SpriteName + "//" + spriteInfo.File + ".png", ImageFormat.Png);
         }
 

@@ -46,7 +46,7 @@ namespace ConvertAll
 
            // Verify.JoinAllImagesAndAlphasFromDirectory(Path.Combine(BaseDirectory, "GUSS.gp"), OutputDirectory);
 
-            var unit = "GRE";
+            var unit = "GET";
 
             var mdParser = new MDFileParser(Path.Combine(@"..\..\..\..\MD\", unit + ".md"));
 
@@ -76,6 +76,8 @@ namespace ConvertAll
             var mirrorOffset = Int32.Parse(directory[4])*(-1);
 
             var spritePath = Path.Combine(OutputDirectory, spriteName);
+
+            Verify.JoinAllImagesAndAlphasFromDirectory(Path.Combine(BaseDirectory, spriteName+".gp"), OutputDirectory);
 
             var c = Directory.GetFiles(spritePath, "*.png").Select(it =>
             {
@@ -147,7 +149,7 @@ namespace ConvertAll
 
         private static void DrawFlippedImage(B c, int maxWidth, int maxHeight, Graphics graphics, int z, int j, int jjj)
         {
-            TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, jjj);
+            c.Content = TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, jjj);
 
             if (IsDebug)
             {
@@ -157,39 +159,46 @@ namespace ConvertAll
             graphics.DrawImage(c.Content, (-z + 16) * maxWidth, maxHeight * j);
         }
 
-        static void TranslateAllPixelsToRight(Bitmap image, int maxmwidth, int maxHeight, int jjj)
+        static Bitmap TranslateAllPixelsToRight(Bitmap image, int maxmwidth, int maxHeight, int jjj)
         {
-            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width,
-              image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
+            var newBitmap = new Bitmap(maxmwidth, maxHeight, image.PixelFormat);
 
-            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * image.Height];
+            BitmapData imageData = newBitmap.LockBits(new Rectangle(0, 0, newBitmap.Width,
+              newBitmap.Height), ImageLockMode.ReadWrite, newBitmap.PixelFormat);
+
+            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * newBitmap.Height];
             IntPtr scan0 = imageData.Scan0;
 
             Marshal.Copy(scan0, imageBytes, 0, imageBytes.Length);
 
             var bytesPerPixel = 4;
 
-            var l = 0;
+            var oldImageBytes = Helper.getImageBytes(image);
 
-            for (int i = 0; i < imageBytes.Length; i += bytesPerPixel)
-            {
-                byte pixelA = imageBytes[i + 3];
-                byte pixelR = imageBytes[i + 2];
-                byte pixelG = imageBytes[i + 1];
-                byte pixelB = imageBytes[i];
+            for (int i = 0; i < newBitmap.Width; i++)
+                for (int j = 0; j < newBitmap.Height; j++)
+                {
+                    if (i < image.Width && j < image.Height)
+                    {
+                        var c = Helper.CartesianToArrayPosition(i, j, image.Width); 
 
+                        var k = Helper.CartesianToArrayPosition(2 * jjj - 1 - i, j, newBitmap.Width);
 
-                imageBytes[i + 3] = pixelA;
-                imageBytes[i + 2] = 0;
-                imageBytes[i + 1] = 0;
-                imageBytes[i] = 0;
-                l++;
-            }
-
+                        imageBytes[k + 3] = oldImageBytes[c + 3];
+                        imageBytes[k + 2] = oldImageBytes[c + 2];
+                        imageBytes[k + 1] = oldImageBytes[c + 1];
+                        imageBytes[k + 0] = oldImageBytes[c + 0];
+                    }
+                }
+            
             Marshal.Copy(imageBytes, 0, scan0, imageBytes.Length);
 
-            image.UnlockBits(imageData);
+            newBitmap.UnlockBits(imageData);
+
+            return newBitmap;
         }
+        
+       
 
 //        private static Bitmap TranslateAllPixelsToRight(Bitmap bitmap, int maxmwidth, int maxHeight, int jjj)
 //        {
