@@ -69,7 +69,7 @@ namespace ConvertAll
                 }
                 finally
                 {
-                    Console.WriteLine("{0} - {1:g}", userLCId[1], sw.Elapsed);
+                    Console.WriteLine("{0} {1} - {2:g}", userLCId[1], userLCId[2].ToUpperInvariant(), sw.Elapsed);
 
                     sw.Stop();
                 }
