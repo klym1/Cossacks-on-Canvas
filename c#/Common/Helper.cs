@@ -44,7 +44,6 @@ namespace Common
 
             Marshal.Copy(scan0, resultImageBytes, 0, resultImageBytes.Length);
 
-            var bytesPerPixel = 4;
             int i = 0;
             int j = 0;
             int z = 0;

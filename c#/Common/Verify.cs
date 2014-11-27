@@ -1,34 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Common
 {
     public static class Verify
     {
-        private static string GetUnitNameFromGPPath(string path)
+        public static IList<Bitmap> JoinAllImagesAndAlphasFromDirectory(string spriteName, string baseDirectory)
         {
-            var spriteMatch = Regex.Match(path, @"[^\\]+(?=.gp$)");
+            var gpDirectory = Path.Combine(baseDirectory, spriteName + ".gp");
 
-            return spriteMatch.Success ? spriteMatch.Value : null;
-        }
-
-        public static void JoinAllImagesAndAlphasFromDirectory(string gpDirectory, string outputDirectory)
-        {
-            var unitName = GetUnitNameFromGPPath(gpDirectory);
-            
-            if(unitName == null) throw new Exception("Required directory with *.gp name not found");
-
-            var lstFile = String.Format("{0}\\{1}.lst", gpDirectory, unitName);
+            var lstFile = String.Format("{0}\\{1}.lst", gpDirectory, spriteName);
 
             if(!File.Exists(lstFile)) throw new FileNotFoundException(lstFile);
+
+            var lstFileContents = File.ReadAllLines(lstFile);
+
+            var result = new Bitmap[lstFileContents.Length];
             
-            foreach (var file in File.ReadAllLines(lstFile))
+            for (int i = 0; i < lstFileContents.Length; i++)
             {
+                var file = lstFileContents[i];
+
                 var imagePath = String.Format("{0}\\{1}.bmp", gpDirectory, file);
                 var alphaPath = String.Format("{0}\\a{1}.bmp", gpDirectory, file);
 
@@ -39,30 +33,19 @@ namespace Common
                 {
                     ImagePath = imagePath,
                     AlphaPath = alphaPath,
-                    SpriteName = unitName,
+                    SpriteName = spriteName,
                     File = file
                 };
 
                 CreateAlphaFromPath(spriteInfo);
                 CreateImageFromPath(spriteInfo);
                 
-                SaveNewSprite(spriteInfo, outputDirectory);
-            }  
-        }
-
-        private static void SaveNewSprite(SpriteInfo spriteInfo, string outputDirectory)
-        {
-            if (!Directory.Exists(outputDirectory + spriteInfo.SpriteName))
-            {
-                Directory.CreateDirectory(outputDirectory + spriteInfo.SpriteName);
+                result[i] = Helper.JoinImageAndAlpha(spriteInfo.ImageBitmap, spriteInfo.AlphaBitmap);
             }
 
-            var newBitmap = Helper.JoinImageAndAlpha(spriteInfo.ImageBitmap, spriteInfo.AlphaBitmap);
-
-            newBitmap.Save(outputDirectory + spriteInfo.SpriteName + "//" + spriteInfo.File + ".png", ImageFormat.Png);
+            return result;
         }
-
-
+        
         private static void CreateAlphaFromPath(SpriteInfo spriteInfo)
         {
             try

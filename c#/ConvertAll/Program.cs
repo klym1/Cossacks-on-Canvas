@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Common;
 using MDParser;
@@ -15,107 +17,136 @@ namespace ConvertAll
 {
     internal class Program
     {
-
-        private const string BaseDirectory =   @"..\..\..\..\images\";
-        private const string OutputDirectory = @"..\..\..\..\images_png\";
+        private const string BaseDirectory = @"..\..\..\..\images\";
+        private const string MDDirectory = @"..\..\..\..\MD\";
+//        private const string OutputDirectory = @"..\..\..\..\images_png\";
         private const string SpritesDirectory = @"..\..\..\..\sprites_png\";
 
-        private static ICollection<SpriteInfo> SpriteInfos { get; set; } 
-
         private static bool IsDebug { get; set; }
-
-        private static readonly float[] dashValues = { 5, 5 };
 
         private readonly static Color color = Color.Red;
 
         private readonly static Brush brush = new SolidBrush(color);
-        private readonly static Pen pen = new Pen(color);
-        
-        private readonly static Font font  = new Font("Verdana", 10);
 
         private static void Main(string [] args)
         {
-//            var allDirectories = Directory
-//                .GetDirectories(BaseDirectory)
-//                .Where(it => it.Contains("GRE"));
-
             if (args.Length > 0)
             {
                 IsDebug = args[0] == "--d";
             }
 
-           // Verify.JoinAllImagesAndAlphasFromDirectory(Path.Combine(BaseDirectory, "GUSS.gp"), OutputDirectory);
+            const string unit = "SWR";
 
-            var unit = "GET";
+            var sw = Stopwatch.StartNew();
 
-            var mdParser = new MDFileParser(Path.Combine(@"..\..\..\..\MD\", unit + ".md"));
+            var mdParser = new MdFileParser(Path.Combine(MDDirectory, unit + ".md"));
+            
+            var userLCs = mdParser.FindUserLCShadow();
 
-            var j = mdParser.FindUserLCShadow();
+            var results = new ConcurrentStack<SpriteGrid>();
 
-            var joinedImagesOutput = j;
-
-            if (!Directory.Exists(OutputDirectory))
+            Parallel.ForEach(userLCs, 
+                new ParallelOptions()
+                {
+                    MaxDegreeOfParallelism = Environment.ProcessorCount
+                }, userLCId =>
             {
-                Directory.CreateDirectory(OutputDirectory);
-            }
-  
-            SpriteInfos = new Collection<SpriteInfo>();
+                var joinedBitmaps = CreateJoinedBitmaps(userLCId);
 
-            foreach (var directory in joinedImagesOutput)
-            {
-                CreateSpritesInImagesPng(directory);
-            }
+                var grid = CreateSpritesInImagesPng(joinedBitmaps);
 
-            SaveInfo(SpriteInfos, Path.Combine(SpritesDirectory, "sprites-info.json"));
+                results.Push(grid);
+                
+                Debug.WriteLine(userLCId[1]);
+                Console.WriteLine(userLCId[1]);
+            });
+
+            SaveJsonAndBitmaps(results);
+
+            sw.Stop();
+
+            var elapsed = sw.Elapsed;
         }
 
-        private static void CreateSpritesInImagesPng(IList<string> directory)
+        private static void SaveJsonAndBitmaps(ConcurrentStack<SpriteGrid> grids)
         {
-            var spriteName = directory[2].ToUpperInvariant();
-
-            var mirrorOffset = Int32.Parse(directory[4])*(-1);
-
-            var spritePath = Path.Combine(OutputDirectory, spriteName);
-
-            Verify.JoinAllImagesAndAlphasFromDirectory(Path.Combine(BaseDirectory, spriteName+".gp"), OutputDirectory);
-
-            var c = Directory.GetFiles(spritePath, "*.png").Select(it =>
-            {
-                var newi = (Bitmap) Image.FromFile(it);
-
-                return new B
-                {
-                    Content = newi,
-                };
-            }).ToArray();
-            
-            var maxHeight = c.Max(it => it.Content.Height);
-            
-            var maxWidth = mirrorOffset * 2;
-            var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, mirrorOffset);
-            
             if (!Directory.Exists(SpritesDirectory))
             {
                 Directory.CreateDirectory(SpritesDirectory);
             }
 
-            SaveBitmap(bitmap, Path.Combine(SpritesDirectory, spriteName + ".png"));
-            
-            var spriteInfo = new SpriteInfo()
+            foreach (var spriteGrid in grids)
             {
-                UnitName = spriteName,
-                SpriteHeight = maxHeight,
-                SpriteWidth = maxWidth,
-                NumberOfFrames = c.Length / 9,
-                NumberOfDirections = 16
-            };
+                SaveBitmap(spriteGrid.GridBitmap, Path.Combine(SpritesDirectory, spriteGrid.UnitName + ".png"));
+            }
 
-            SpriteInfos.Add(spriteInfo);
+            SaveInfo(grids, Path.Combine(SpritesDirectory, "sprites-info.json"));
         }
-        
-        private static void SaveInfo(ICollection<SpriteInfo> spriteInfo, string path)
+
+        private static void SaveInfo(ConcurrentStack<SpriteGrid> spriteInfo, string path)
         {
             File.WriteAllText(path, "var sprites = " + (new JavaScriptSerializer()).Serialize(spriteInfo));
+        }
+
+        private static void SaveBitmap(Bitmap bitmap, string path)
+        {
+            using (var newBitmap = new Bitmap(bitmap))
+            {
+                newBitmap.Save(path, ImageFormat.Png);
+            }
+        }
+
+        private static Sprite CreateJoinedBitmaps(string[] userLC)
+        {
+          //  var sprites = new Sprite[userLC.Length];
+            
+          //  for (int i = 0; i < userLCs.Length; i++)
+           // {
+             //   var userLC = userLCs[i];
+                
+                var spriteName = userLC[2].ToUpperInvariant();
+                var mirrorOffset = Int32.Parse(userLC[4]) * (-1);
+
+               var sprite = new Sprite
+                {
+                    MirrorOffset = mirrorOffset,
+                    Name = spriteName,
+                    Bitmaps = Verify.JoinAllImagesAndAlphasFromDirectory(spriteName, BaseDirectory)
+                };
+         //   }
+
+            return sprite;
+        }
+
+        private static SpriteGrid CreateSpritesInImagesPng(Sprite resultArrayOfJoinedBitmap)
+        {
+//            var result = new Collection<SpriteGrid>();
+
+            // 4 - 6 elems
+            //foreach (var resultArrayOfJoinedBitmap in resultArrayOfJoinedBitmaps)
+            //{
+                var c = resultArrayOfJoinedBitmap.Bitmaps.Select(it => new B { Content = it }).ToArray();
+
+                var maxHeight = c.Max(it => it.Content.Height);
+                var maxWidth = resultArrayOfJoinedBitmap.MirrorOffset * 2;
+
+                var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, resultArrayOfJoinedBitmap.MirrorOffset);
+                
+                var spriteInfo = new SpriteGrid
+                {
+                    GridBitmap = bitmap,
+                    UnitName = resultArrayOfJoinedBitmap.Name,
+                    SpriteHeight = maxHeight,
+                    SpriteWidth = maxWidth,
+                    NumberOfFrames = c.Length / 9,
+                    NumberOfDirections = 16
+                };
+                
+//                result.Add(spriteInfo);
+            //}
+
+            return spriteInfo;
+
         }
         
         private static Bitmap CreateSpriteBitmap(B [] c, int maxHeight, int maxWidth, int jjj)
@@ -123,27 +154,29 @@ namespace ConvertAll
             var newimage = new Bitmap(maxWidth * 16, maxHeight * (c.Length / 9));
 
             var graphics = Graphics.FromImage(newimage);
-            
+            var sw = Stopwatch.StartNew();
             for (int z = 0; z < 9; z++)
             {
                 for (int i = z, j = 0; i < c.Length; i += 9, j++)
                 {
                     if (IsDebug)
                     {
-                        graphics.FillRectangle(brush, z * maxWidth, maxHeight * j, c[i].Content.Width, c[i].Content.Height);
+                       // graphics.FillRectangle(brush, z * maxWidth, maxHeight * j, c[i].Content.Width, c[i].Content.Height);
                     }
-
+                    var sw3 = Stopwatch.StartNew();
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
-                    
+                   
                     if (z > 0 && z < 8)
                     {
-                        DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, jjj);
+                       DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, jjj);
                     }
+
+                    var ggg3 = sw3.Elapsed;
                 } 
             }
 
             graphics.Save();
-
+            var ggg = sw.Elapsed;
             return newimage;
         }
 
@@ -153,7 +186,7 @@ namespace ConvertAll
 
             if (IsDebug)
             {
-                graphics.FillRectangle(brush, (-z + 16) * maxWidth, maxHeight * j, c.Content.Width, c.Content.Height);
+              // graphics.FillRectangle(brush, (-z + 16) * maxWidth, maxHeight * j, c.Content.Width, c.Content.Height);
             }
             
             graphics.DrawImage(c.Content, (-z + 16) * maxWidth, maxHeight * j);
@@ -170,8 +203,6 @@ namespace ConvertAll
             IntPtr scan0 = imageData.Scan0;
 
             Marshal.Copy(scan0, imageBytes, 0, imageBytes.Length);
-
-            var bytesPerPixel = 4;
 
             var oldImageBytes = Helper.getImageBytes(image);
 
@@ -196,29 +227,6 @@ namespace ConvertAll
             newBitmap.UnlockBits(imageData);
 
             return newBitmap;
-        }
-        
-       
-
-//        private static Bitmap TranslateAllPixelsToRight(Bitmap bitmap, int maxmwidth, int maxHeight, int jjj)
-//        {
-//            var newbitmap = new Bitmap(maxmwidth, maxHeight);
-//
-//            for (int j = 0; j < bitmap.Height; j++)
-//                for (int i = 0; i < bitmap.Width; i++)
-//                {
-//                    newbitmap.SetPixel(2*jjj - i - 1, j, bitmap.GetPixel(i, j));
-//                }
-//
-//            return newbitmap;
-//        }
-        
-        private static void SaveBitmap(Bitmap bitmap, string path)
-        {
-            using (var newBitmap = new Bitmap(bitmap))
-            {
-                newBitmap.Save(path, ImageFormat.Png);
-            }
-        }
+        }  
     }
 }

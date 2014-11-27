@@ -41,7 +41,8 @@
     <Compile Include="B.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpriteInfo.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="SpriteGrid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
