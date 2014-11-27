@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Web.Script.Serialization;
 
 namespace ConvertAll
 {
@@ -10,6 +11,8 @@ namespace ConvertAll
         public int NumberOfFrames { get; set; }
         public int NumberOfDirections { get; set; }
         public string UnitName { get; set; }
+
+        [ScriptIgnore]
         public Bitmap GridBitmap { get; set; }
     }
 }
