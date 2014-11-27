@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -36,9 +34,7 @@ namespace ConvertAll
             }
 
             const string unit = "SWR";
-
-            var sw = Stopwatch.StartNew();
-
+            
             var mdParser = new MdFileParser(Path.Combine(MDDirectory, unit + ".md"));
             
             var userLCs = mdParser.FindUserLCShadow();
@@ -51,21 +47,20 @@ namespace ConvertAll
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 }, userLCId =>
             {
+                var sw = Stopwatch.StartNew();
+
                 var joinedBitmaps = CreateJoinedBitmaps(userLCId);
 
                 var grid = CreateSpritesInImagesPng(joinedBitmaps);
 
                 results.Push(grid);
                 
-                Debug.WriteLine(userLCId[1]);
-                Console.WriteLine(userLCId[1]);
+                Console.WriteLine("{0} - {1:g}",userLCId[1], sw.Elapsed);
+
+                sw.Stop();
             });
 
             SaveJsonAndBitmaps(results);
-
-            sw.Stop();
-
-            var elapsed = sw.Elapsed;
         }
 
         private static void SaveJsonAndBitmaps(ConcurrentStack<SpriteGrid> grids)
@@ -98,55 +93,39 @@ namespace ConvertAll
 
         private static Sprite CreateJoinedBitmaps(string[] userLC)
         {
-          //  var sprites = new Sprite[userLC.Length];
-            
-          //  for (int i = 0; i < userLCs.Length; i++)
-           // {
-             //   var userLC = userLCs[i];
-                
-                var spriteName = userLC[2].ToUpperInvariant();
-                var mirrorOffset = Int32.Parse(userLC[4]) * (-1);
+            var spriteName = userLC[2].ToUpperInvariant();
+            var mirrorOffset = Int32.Parse(userLC[4])*(-1);
 
-               var sprite = new Sprite
-                {
-                    MirrorOffset = mirrorOffset,
-                    Name = spriteName,
-                    Bitmaps = Verify.JoinAllImagesAndAlphasFromDirectory(spriteName, BaseDirectory)
-                };
-         //   }
+            var sprite = new Sprite
+            {
+                MirrorOffset = mirrorOffset,
+                Name = spriteName,
+                Bitmaps = Verify.JoinAllImagesAndAlphasFromDirectory(spriteName, BaseDirectory)
+            };
 
             return sprite;
         }
 
         private static SpriteGrid CreateSpritesInImagesPng(Sprite resultArrayOfJoinedBitmap)
         {
-//            var result = new Collection<SpriteGrid>();
+            var c = resultArrayOfJoinedBitmap.Bitmaps.Select(it => new B {Content = it}).ToArray();
 
-            // 4 - 6 elems
-            //foreach (var resultArrayOfJoinedBitmap in resultArrayOfJoinedBitmaps)
-            //{
-                var c = resultArrayOfJoinedBitmap.Bitmaps.Select(it => new B { Content = it }).ToArray();
+            var maxHeight = c.Max(it => it.Content.Height);
+            var maxWidth = resultArrayOfJoinedBitmap.MirrorOffset*2;
 
-                var maxHeight = c.Max(it => it.Content.Height);
-                var maxWidth = resultArrayOfJoinedBitmap.MirrorOffset * 2;
+            var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, resultArrayOfJoinedBitmap.MirrorOffset);
 
-                var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, resultArrayOfJoinedBitmap.MirrorOffset);
+            var spriteInfo = new SpriteGrid
+            {
+                GridBitmap = bitmap,
+                UnitName = resultArrayOfJoinedBitmap.Name,
+                SpriteHeight = maxHeight,
+                SpriteWidth = maxWidth,
+                NumberOfFrames = c.Length/9,
+                NumberOfDirections = 16
+            };
                 
-                var spriteInfo = new SpriteGrid
-                {
-                    GridBitmap = bitmap,
-                    UnitName = resultArrayOfJoinedBitmap.Name,
-                    SpriteHeight = maxHeight,
-                    SpriteWidth = maxWidth,
-                    NumberOfFrames = c.Length / 9,
-                    NumberOfDirections = 16
-                };
-                
-//                result.Add(spriteInfo);
-            //}
-
             return spriteInfo;
-
         }
         
         private static Bitmap CreateSpriteBitmap(B [] c, int maxHeight, int maxWidth, int jjj)
