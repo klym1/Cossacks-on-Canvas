@@ -22,10 +22,6 @@ namespace ConvertAll
 
         private static bool IsDebug { get; set; }
 
-        private readonly static Color color = Color.Red;
-
-        private readonly static Brush brush = new SolidBrush(color);
-
         private static void Main(string [] args)
         {
             if (args.Length > 0)
@@ -42,7 +38,7 @@ namespace ConvertAll
             var results = new ConcurrentStack<SpriteGrid>();
 
             Parallel.ForEach(userLCs, 
-                new ParallelOptions()
+                new ParallelOptions
                 {
                     MaxDegreeOfParallelism = Environment.ProcessorCount
                 }, userLCId =>
@@ -80,7 +76,7 @@ namespace ConvertAll
 
         private static void SaveInfo(ConcurrentStack<SpriteGrid> spriteInfo, string path)
         {
-            File.WriteAllText(path, "var sprites = " + (new JavaScriptSerializer()).Serialize(spriteInfo));
+            File.WriteAllText(path, "var sprites = " + (new JavaScriptSerializer()).Serialize(spriteInfo.OrderBy(it => it.Id)));
         }
 
         private static void SaveBitmap(Bitmap bitmap, string path)
@@ -93,11 +89,13 @@ namespace ConvertAll
 
         private static Sprite CreateJoinedBitmaps(string[] userLC)
         {
+            var id = Int32.Parse(userLC[1]);
             var spriteName = userLC[2].ToUpperInvariant();
             var mirrorOffset = Int32.Parse(userLC[4])*(-1);
 
             var sprite = new Sprite
             {
+                Id = id,
                 MirrorOffset = mirrorOffset,
                 Name = spriteName,
                 Bitmaps = Verify.JoinAllImagesAndAlphasFromDirectory(spriteName, BaseDirectory)
@@ -117,6 +115,7 @@ namespace ConvertAll
 
             var spriteInfo = new SpriteGrid
             {
+                Id = resultArrayOfJoinedBitmap.Id,
                 GridBitmap = bitmap,
                 UnitName = resultArrayOfJoinedBitmap.Name,
                 SpriteHeight = maxHeight,
@@ -133,7 +132,6 @@ namespace ConvertAll
             var newimage = new Bitmap(maxWidth * 16, maxHeight * (c.Length / 9));
 
             var graphics = Graphics.FromImage(newimage);
-            var sw = Stopwatch.StartNew();
             for (int z = 0; z < 9; z++)
             {
                 for (int i = z, j = 0; i < c.Length; i += 9, j++)
@@ -142,20 +140,17 @@ namespace ConvertAll
                     {
                        // graphics.FillRectangle(brush, z * maxWidth, maxHeight * j, c[i].Content.Width, c[i].Content.Height);
                     }
-                    var sw3 = Stopwatch.StartNew();
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
                    
                     if (z > 0 && z < 8)
                     {
                        DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, jjj);
                     }
-
-                    var ggg3 = sw3.Elapsed;
                 } 
             }
 
             graphics.Save();
-            var ggg = sw.Elapsed;
+           
             return newimage;
         }
 
