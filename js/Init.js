@@ -1,4 +1,6 @@
-var SHOW_DEBUG_INFO = false;
+"use strict";
+
+var SHOW_DEBUG_INFO = true;
 
 var world = (function () {
     
@@ -22,14 +24,9 @@ var world = (function () {
             sprites[i].XSymmetry);
 
         grenadier.states.push(unit_state);
-    }
-
-    for(var i = 0; i < transitions.length; i++){
-        
-        grenadier.AvailableCommands.push(transitions[i]);
-    }
+    }   
     
-    grenadier.SetState(0);
+    grenadier.SetState(3);
 
     return world;
 } ());

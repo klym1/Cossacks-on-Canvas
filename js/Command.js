@@ -8,6 +8,7 @@ function Command(o){
 	this.initialised = false;
 	this.init = o.init;
 	this.initData = {};
+	this.priority = o.priority || 0;
 
 	this.Execute = function(){
 
@@ -30,5 +31,5 @@ function Command(o){
 }
 
 Command.prototype.toString = function() {
-	return this.i;
+	return "[*" + this.priority + "] ";
 };

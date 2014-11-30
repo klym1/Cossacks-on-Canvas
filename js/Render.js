@@ -91,7 +91,7 @@ function Render (world) {
 		if(SHOW_DEBUG_INFO === true)
 		{
 			document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
-			document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0]));
+			document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0].commandsQueue));
 		} else {
 			document.getElementById("world-info").innerHTML = null;
 			document.getElementById("unit-info").innerHTML = null;
