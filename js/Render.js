@@ -35,7 +35,6 @@ function Render (world) {
 		
 		var self = this;
 
-		// Get canvas
 		this.canvas = document.getElementById("can");
 		this.canvas.width = canvas_width;
 		this.canvas.height = canvas_height;
@@ -82,7 +81,7 @@ function Render (world) {
 			var image = this._resources[state.spriteName];
 
 			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
-			this.ctx.rect(unit.x, unit.y, 2, 2);
+		//	this.ctx.rect(unit.x, unit.y, 2, 2);
 			this.ctx.stroke();
 		}
 	};
