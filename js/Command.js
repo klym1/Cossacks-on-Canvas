@@ -16,7 +16,6 @@ function Command(o){
 			if(this.init !== undefined){
 				this.initData = this.init(this.commandHandler.unit);
 				this.initialised = true;
-				console.log("Command initialised");
 			}
 		}
 

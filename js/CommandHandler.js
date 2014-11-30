@@ -13,6 +13,7 @@ CommandHandler.prototype.AddCommand = function(command){
 }
 
 CommandHandler.prototype.HandleCommandQueue = function(){
+	
 	 if(this.commandsQueue.IsEmpty()){
 
 		if(this.commandIsExecuting === false){

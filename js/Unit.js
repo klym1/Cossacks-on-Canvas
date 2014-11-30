@@ -28,21 +28,26 @@ Unit.prototype.GetDefaultCommand = function(){
 	var random = Math.random() * 100;
 	var rest = Math.random() > 0.2 ? 1: 0;
 	
-	var defaultCommand = new Command({commandHandler : this.commandHandler, callback : function(user, i){
+	var defaultCommand = new Command({
+		commandHandler : this.commandHandler, 
+		callback : function(user, i){
+			if(!rest){
 
-	if(!rest){
+				user.State.j += 1;
+				user.State.j %= user.State.k;	
+			}
+		}, 
 
-		user.State.j += 1;
-		user.State.j %= user.State.k;	
-	}
+		finishConditions : function(user, i){
+			return i > user.State.k;
+		}, 
 
-	}, finishConditions : function(user, i){
-		return i > user.State.k;
-	}, init: function(user){
-		user.State = user.states[2];
-		user.State.j = 0;
-	}, priority: -1
-	});
+		init: function(user){
+			user.State = user.states[2];
+			user.State.j = 0;
+		}, 
+
+		priority: -1});
 
 	return defaultCommand;
 }
@@ -60,7 +65,7 @@ Unit.prototype.Rotate = function(){
 		user.n = i % 16;
 
 	}, finishConditions : function(user, i){
-		return i > 1000;
+		return i > 100;
 	}});
 
 	this.AddCommand(command);
@@ -68,11 +73,13 @@ Unit.prototype.Rotate = function(){
 
 Unit.prototype.go = function(N, priority){
 
+	var stepsNumber = 100;
+
 	var command = new Command({
 		commandHandler : this.commandHandler,
 		callback : function(user, i, initData){
 
-			if(i < initData.length - 1)
+			//if(i < initData.length - 1)
 			{
 				user.x = initData[i][0];
 				user.y = initData[i][1];
@@ -86,12 +93,10 @@ Unit.prototype.go = function(N, priority){
 		},
 
 		finishConditions: function(user, i){
-			return i >= 30;
+			return i > stepsNumber - 10;
 		},
 
 		init: function(user){
-
-			var stepsNumber = 102;
 
 			var cachedCoordinates = new Array(stepsNumber);
 
@@ -116,4 +121,3 @@ Unit.prototype.toString = function()
 {
 	return this.name;
 }
-
