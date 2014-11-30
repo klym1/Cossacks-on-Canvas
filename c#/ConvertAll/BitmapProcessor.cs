@@ -52,6 +52,7 @@ namespace ConvertAll
             var spriteInfo = new SpriteGrid
             {
                 Id = resultArrayOfJoinedBitmap.Id,
+                XSymmetry = resultArrayOfJoinedBitmap.MirrorOffset,
                 GridBitmap = bitmap,
                 UnitName = resultArrayOfJoinedBitmap.Name,
                 SpriteHeight = maxHeight,
@@ -75,6 +76,10 @@ namespace ConvertAll
                 {
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
 
+                    var pen = new Pen(Color.Red);
+
+                    graphics.DrawLine(pen, z * maxWidth + jjj, maxHeight * j, z * maxWidth + jjj, maxHeight * (j+1));
+
                     if (z > 0 && z < 8)
                     {
                         DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, jjj);
@@ -89,9 +94,15 @@ namespace ConvertAll
 
         private static void DrawFlippedImage(B c, int maxWidth, int maxHeight, Graphics graphics, int z, int j, int jjj)
         {
-            c.Content = TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, jjj);
+            var xSymmetryPoint = jjj;
+
+            c.Content = TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, xSymmetryPoint);
 
             graphics.DrawImage(c.Content, (-z + 16) * maxWidth, maxHeight * j);
+
+            var pen = new Pen(Color.Red);
+
+            graphics.DrawLine(pen, (-z + 16) * maxWidth + xSymmetryPoint, maxHeight * j, (-z + 16) * maxWidth + xSymmetryPoint, maxHeight * (j + 1));
         }
 
         static Bitmap TranslateAllPixelsToRight(Bitmap image, int maxmwidth, int maxHeight, int jjj)

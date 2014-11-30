@@ -4,8 +4,8 @@ function World(width, height) {
   this.width = width;
   this.height = height;
   this.units = [];
-  this.TimeQuantumNumber = 0;
-  this.QuantumEpoch = 0;
+  //this.TimeQuantumNumber = 0;
+ // this.QuantumEpoch = 0;
   this.TickTime = 30;
 
   this.Run = function(){
@@ -17,14 +17,12 @@ function World(width, height) {
   			self.units[i].tick();
   		};
 
-  		self.TimeQuantumNumber++;
+  	//	self.TimeQuantumNumber++;
 
-  		if(self.TimeQuantumNumber == 1024){
-  			self.QuantumEpoch++;
-  			self.TimeQuantumNumber = 0;
-  		}
-
-  		console.log("World time: " + self.TimeQuantumNumber);	
+  	//	if(self.TimeQuantumNumber == 1024){
+  	//		self.QuantumEpoch++;
+  	//		self.TimeQuantumNumber = 0;
+  	//	}
 
   	}, this.TickTime);
   }

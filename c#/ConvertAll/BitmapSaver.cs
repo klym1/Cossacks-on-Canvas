@@ -27,14 +27,14 @@ namespace ConvertAll
             foreach (var spriteGrid in grids)
             {
                 SaveBitmap(spriteGrid.GridBitmap, Path.Combine(SpritesDirectory, spriteGrid.UnitName + ".png"));
-            }
-
-            SaveInfo(grids, Path.Combine(SpritesDirectory, "sprites-info.json"));
+            } 
         }
 
-        private static void SaveInfo(IEnumerable<SpriteGrid> spriteInfo, string path)
+        public void SaveInfo(object unitInfo, string fileName, string path, string variableName)
         {
-            File.WriteAllText(path, "var sprites = " + (new JavaScriptSerializer()).Serialize(spriteInfo.OrderBy(it => it.Id)));
+            var serialized = (new JavaScriptSerializer()).Serialize(unitInfo);
+
+            File.WriteAllText(Path.Combine(SpritesDirectory, fileName), "var "+variableName+" = " + serialized);
         }
 
         private static void SaveBitmap(Bitmap bitmap, string path)

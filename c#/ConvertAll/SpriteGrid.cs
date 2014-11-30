@@ -14,5 +14,7 @@ namespace ConvertAll
 
         [ScriptIgnore]
         public Bitmap GridBitmap { get; set; }
+
+        public int XSymmetry { get; set; }
     }
 }

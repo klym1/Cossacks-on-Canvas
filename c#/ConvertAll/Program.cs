@@ -16,7 +16,7 @@ namespace ConvertAll
 
         private static void Main(string [] args)
         {
-            var unit = "GRE";
+            var unit = "KOF";
 
             if (args.Length == 1)
             {
@@ -36,6 +36,8 @@ namespace ConvertAll
             
             var userLCs = mdParser.FindUserLCShadow();
             var results = new ConcurrentStack<SpriteGrid>();
+
+            var uiii = mdParser.FindUserTransitionData();
 
             Parallel.ForEach(userLCs, 
                 new ParallelOptions
@@ -59,6 +61,7 @@ namespace ConvertAll
                 catch (Exception e)
                 {
                     Console.WriteLine("{0}", e);
+                    Console.ReadKey();
                 }
                 finally
                 {
@@ -69,6 +72,9 @@ namespace ConvertAll
             });
 
             bitmapSaver.SaveJsonAndBitmaps(results);
+
+            bitmapSaver.SaveInfo(results, "sprites-info.json", SpritesDirectory, "sprites");
+            bitmapSaver.SaveInfo(uiii, "transitions.json", SpritesDirectory, "transitions");
         }
     }
 }

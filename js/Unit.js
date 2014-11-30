@@ -17,6 +17,8 @@ function Unit(name){
 
   this.State = {};
 
+  this.AvailableCommands = [];
+
   this.tick = function(){
 
   	if(this.commandIsExecuting === false){
@@ -28,13 +30,37 @@ function Unit(name){
 		this.currentCommand = this.commands.shift();
 		this.currentCommand.Execute();
 
-  		} else {
-  			//this.SetState(0);
   		}
+
 	} else {
   		this.currentCommand.Execute();
   	} 	
   };
+}
+
+Unit.prototype.Death = function(commandId){
+	
+	var c = this.AvailableCommands[commandId];
+	var numberOfStates = c.Data.length;
+
+	var command = new Command({unit : this, callback : function(user, i){
+
+		user.State.j = c.Data[i % numberOfStates][1];
+
+		for (var j = 0; j < user.states.length; j++) {
+			if(user.states[j].Id == c.Data[i % numberOfStates][0]){
+				user.State = user.states[j];
+			}
+		};
+
+		//user.State.j += 1;
+		//user.State.j %= user.State.k;	
+
+	}, finishConditions : function(user, i){
+		return i > 100;
+	}});
+
+	this.commands.push(command);
 }
 
 Unit.prototype.SetState = function(state){
@@ -42,17 +68,6 @@ Unit.prototype.SetState = function(state){
 	this.activeState = state;
 	this.State = this.states[state];
 }
-
-Unit.prototype.Turn45L = function(){
-
-	var command = new Command({unit : this, callback : function(user){
-		user.n++;
-	}, finishConditions : function(user){
-		return user.n > 5;
-	}});
-
-	this.commands.push(command);
-};
 
 Unit.prototype.Rotate = function(){
 
@@ -96,7 +111,7 @@ Unit.prototype.go = function(N){
 				user.State.j %= user.State.k;	
 			}
 
-			user.SetState(1);
+			user.SetState(2);
 			user.n = N;
 		},
 

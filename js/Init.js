@@ -17,11 +17,20 @@ var world = (function () {
             sprites[i].UnitName, 
             sprites[i].SpriteHeight, 
             sprites[i].SpriteWidth, 
-            sprites[i].NumberOfFrames);
+            sprites[i].NumberOfFrames,
+            sprites[i].Id,
+            sprites[i].XSymmetry);
 
         grenadier.states.push(unit_state);
     }
-     grenadier.SetState(1);
+
+    for(var i = 0; i < transitions.length; i++){
+        
+        grenadier.AvailableCommands.push(transitions[i]);
+    }
+    
+    grenadier.SetState(0);
+
     return world;
 } ());
 
