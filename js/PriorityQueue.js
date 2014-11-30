@@ -19,6 +19,11 @@ PriorityQueue.prototype.insert = function (value) {
     this.bubbleUp(this.length - 1);
 };
 PriorityQueue.prototype.getHighestPriorityElement = function () {
+    return this.queue[0];
+};
+
+PriorityQueue.prototype.shiftHighestPriorityElement = function () {
+    this.length--;
     return this.queue.shift();
 };
 

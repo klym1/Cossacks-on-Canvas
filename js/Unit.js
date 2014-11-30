@@ -10,37 +10,19 @@ function Unit(name){
   this.states = [];
   this.n = 0;  // direction
   this.activeState = 0;
-
-  this.commandsQueue = new PriorityQueue("priority");
+ 
   this.commandIsExecuting = false;
   this.currentCommand = null;
-
+  this.commandHandler = new CommandHandler(this);
   this.State = {};
-
-    this.tick = function(){
-
-  	if(this.commandIsExecuting === false){
-
-		if(this.commandsQueue.IsEmpty() === false){
-
-  		console.log("Command added");
-
-		this.currentCommand = this.commandsQueue.getHighestPriorityElement();
-
-  		} else {
-			
-			this.currentCommand = this.GetDefaultCommand();		
-  		}
-	} 
-  	
-  	this.currentCommand.Execute();
-  };
 }
 
+Unit.prototype.tick = function(){
+	this.commandHandler.HandleCommandQueue();
+ };
+
 Unit.prototype.AddCommand = function(command){
-
-	this.commandsQueue.insert(command);
-
+	this.commandHandler.AddCommand(command);
 }
 
 Unit.prototype.GetDefaultCommand = function(){
@@ -50,43 +32,21 @@ Unit.prototype.GetDefaultCommand = function(){
 	
 		var defaultCommand = new Command({unit : this, callback : function(user, i){
 
-					if(!rest){
+	if(!rest){
 
-					user.State.j += 1;
-					user.State.j %= user.State.k;	
-				}
-
-				}, finishConditions : function(user, i){
-					return i > user.State.k;
-				}, init: function(user){
-					user.State = user.states[2];
-					user.State.j = 0;
-				}, priority: -1
-			});
-
-	return defaultCommand;
-}
-
-Unit.prototype.Death = function(commandId){
-	
-	var c = this.AvailablecommandsQueue[commandId];
-	var numberOfStates = c.Data.length;
-
-	var command = new Command({unit : this, callback : function(user, i){
-
-		user.State.j = c.Data[i % numberOfStates][1];
-
-		for (var j = 0; j < user.states.length; j++) {
-			if(user.states[j].Id == c.Data[i % numberOfStates][0]){
-				user.State = user.states[j];
-			}
-		};
+		user.State.j += 1;
+		user.State.j %= user.State.k;	
+	}
 
 	}, finishConditions : function(user, i){
-		return i > 100;
-	}});
+		return i > user.State.k;
+	}, init: function(user){
+		user.State = user.states[2];
+		user.State.j = 0;
+	}, priority: -1
+	});
 
-	this.AddCommand(command);
+	return defaultCommand;
 }
 
 Unit.prototype.SetState = function(state){
@@ -128,7 +88,7 @@ Unit.prototype.go = function(N, priority){
 		},
 
 		finishConditions: function(user, i){
-			return i >= 100;
+			return i >= 30;
 		},
 
 		init: function(user){
