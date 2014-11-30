@@ -1,10 +1,11 @@
 "use strict";
 
 function CommandHandler(unit){
-    
 	this.unit = unit;
     this.commandsQueue = new PriorityQueue("priority");
 	this.HighPriorityInterruption = false;
+	this.commandIsExecuting = false;
+  	this.currentCommand = null;
 }
 
 CommandHandler.prototype.AddCommand = function(command){
@@ -14,7 +15,7 @@ CommandHandler.prototype.AddCommand = function(command){
 CommandHandler.prototype.HandleCommandQueue = function(){
 	 if(this.commandsQueue.IsEmpty()){
 
-		if(this.unit.commandIsExecuting === false){
+		if(this.commandIsExecuting === false){
 
 			var defaultCommand = this.unit.GetDefaultCommand()
     		this.AddCommand(defaultCommand);
@@ -24,17 +25,17 @@ CommandHandler.prototype.HandleCommandQueue = function(){
 
     	var queuedCommand = this.commandsQueue.getHighestPriorityElement();	
 
-    	if(this.unit.currentCommand.priority < queuedCommand.priority){
+    	if(this.currentCommand.priority < queuedCommand.priority){
 
-    		this.AddCommand(this.unit.currentCommand);
+    		this.AddCommand(this.currentCommand);
     		this.HighPriorityInterruption = true;
     	} 
     }
  
-	if(this.unit.commandIsExecuting === false || this.HighPriorityInterruption){
-		this.unit.currentCommand = this.commandsQueue.shiftHighestPriorityElement();
+	if(this.commandIsExecuting === false || this.HighPriorityInterruption){
+		this.currentCommand = this.commandsQueue.shiftHighestPriorityElement();
 		this.HighPriorityInterruption = false
 	}
  	
-  	this.unit.currentCommand.Execute();
+  	this.currentCommand.Execute();
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 function Command(o){
-	this.unit = o.unit;
+	this.commandHandler = o.commandHandler;
 	this.callback = o.callback;
 	this.finishConditions = o.finishConditions;
 	this.i = 0; //command iteration
@@ -14,18 +14,18 @@ function Command(o){
 
 		if(this.initialised === false){
 			if(this.init !== undefined){
-				this.initData = this.init(this.unit);
+				this.initData = this.init(this.commandHandler.unit);
 				this.initialised = true;
 				console.log("Command initialised");
 			}
 		}
 
-		this.callback(this.unit, this.i, this.initData);
-		this.unit.commandIsExecuting = true;
+		this.callback(this.commandHandler.unit, this.i, this.initData);
+		this.commandHandler.commandIsExecuting = true;
 	
 		this.i++; 
-		if(this.finishConditions(this.unit, this.i) === true){
-		this.unit.commandIsExecuting = false;
+		if(this.finishConditions(this.commandHandler.unit, this.i) === true){
+		this.commandHandler.commandIsExecuting = false;
 		}
 	};
 }

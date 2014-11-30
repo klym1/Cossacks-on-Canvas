@@ -10,9 +10,7 @@ function Unit(name){
   this.states = [];
   this.n = 0;  // direction
   this.activeState = 0;
- 
-  this.commandIsExecuting = false;
-  this.currentCommand = null;
+   
   this.commandHandler = new CommandHandler(this);
   this.State = {};
 }
@@ -30,7 +28,7 @@ Unit.prototype.GetDefaultCommand = function(){
 	var random = Math.random() * 100;
 	var rest = Math.random() > 0.2 ? 1: 0;
 	
-		var defaultCommand = new Command({unit : this, callback : function(user, i){
+	var defaultCommand = new Command({commandHandler : this.commandHandler, callback : function(user, i){
 
 	if(!rest){
 
@@ -57,7 +55,7 @@ Unit.prototype.SetState = function(state){
 
 Unit.prototype.Rotate = function(){
 
-	var command = new Command({unit : this, callback : function(user, i){
+	var command = new Command({commandHandler : this.commandHandler, callback : function(user, i){
 
 		user.n = i % 16;
 
@@ -71,7 +69,7 @@ Unit.prototype.Rotate = function(){
 Unit.prototype.go = function(N, priority){
 
 	var command = new Command({
-		unit : this,
+		commandHandler : this.commandHandler,
 		callback : function(user, i, initData){
 
 			if(i < initData.length - 1)
