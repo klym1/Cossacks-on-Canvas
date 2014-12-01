@@ -36,12 +36,16 @@ function Render (world) {
 		var offsetX = e.offsetX;
 		var offsetY = e.offsetY;
 
+		if(e.button == 2){
+			this.HandleMouseLeftClick.bind(this)(e);
+		}
+
 		for (var i = 0; i < this.world.units.length; i++) {
 
 			var unit = this.world.units[i];
   		
 			var actualUnitHalfWidth = 20;
-			var actualUnitHalfHeight = 30;
+			var actualUnitHalfHeight = 70;
 
   			unit.IsSelected = unit.x + unit.State.xSymmetry - actualUnitHalfWidth < offsetX 
   							&& unit.x + unit.State.xSymmetry + actualUnitHalfWidth > offsetX
@@ -51,6 +55,12 @@ function Render (world) {
   		};
 
 		document.getElementById("world-info").innerHTML = "mousedown";
+	}
+
+	this.HandleMouseLeftClick = function(e){
+
+		var unitHandler = new UnitHandler(this.world.units[0]);
+		unitHandler.Go(12,23);
 	}
 
 	this.mouseUpHandler = function(e){
@@ -67,12 +77,10 @@ function Render (world) {
 		this.canvas = document.getElementById("can");
 		this.canvas.width = canvas_width;
 		this.canvas.height = canvas_height;
-
 	
 		this.canvas.addEventListener("mousedown", this.mouseUpHandler.bind(this));
 		this.canvas.addEventListener("mouseup", this.mouseDownHandler.bind(this));
-		this.canvas.addEventListener("contextMenu", function(){return false;});
-
+		
  		this.canvas_height = this.canvas.height;
 	  	this.canvas_width = this.canvas.width;
 
