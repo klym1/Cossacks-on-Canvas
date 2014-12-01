@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function UnitState(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry){
   this.spriteName = spriteName;
 

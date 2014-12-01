@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function Command(o){
 	this.commandHandler = o.commandHandler;
 	this.callback = o.callback;

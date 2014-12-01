@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function CommandHandler(unit){
 	this.unit = unit;
     this.commandsQueue = new PriorityQueue("priority");

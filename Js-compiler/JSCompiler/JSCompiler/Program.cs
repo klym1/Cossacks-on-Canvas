@@ -8,34 +8,13 @@ using System.Web.Script.Serialization;
 
 namespace JSCompiler
 {
-    internal class Warning
-    {
-        public string type { get; set; }
-        public string file { get; set; }
-        public int lineno { get; set; }
-        public int charno { get; set; }
-        public string warning { get; set; }
-        public string line { get; set; }
-    }
-
-    internal class Statistics
-    {
-        public int originalSize { get; set; }
-        public int originalGzipSize { get; set; }
-        public int compressedSize { get; set; }
-        public int compressedGzipSize { get; set; }
-        public int compileTime { get; set; }
-    }
-
-    class ClosureComplierResult
-    {
-        public string CompiledCode { get; set; }
-        public Statistics Statistics { get; set; }
-        public ICollection<Warning> Warnings { get; set; } 
-    }
-    
     class Program
     {
+        private static int GetFileNameIndex(string compilerSourceName)
+        {
+            return Int32.Parse(compilerSourceName.Replace("Input_", ""));
+        }
+
         static void Main()
         {
             var pairs = new Collection<KeyValuePair<string,string>>()
@@ -57,6 +36,8 @@ namespace JSCompiler
                 "js\\World.js",
                 "js\\Command.js",
                 "js\\Unit.js",
+                "js\\PriorityQueue.js",
+                "js\\CommandHandler.js",
                 "js\\UnitState.js",
                 "js\\animationLoop.js",
                 "js\\Render.js",
@@ -81,7 +62,31 @@ namespace JSCompiler
 
             File.WriteAllText("..\\..\\..\\..\\..\\compiledCode.js", closureComplierResult.CompiledCode);
 
-            Console.WriteLine("Warnings: {0}", closureComplierResult.Warnings.Count);
+
+            if (closureComplierResult.Warnings != null)
+            {
+                foreach (var warning in closureComplierResult.Warnings)
+                {
+                    Console.WriteLine("{0} {1} {2}  {3}",
+                        files[GetFileNameIndex(warning.file)],
+                        warning.lineno,
+                        warning.charno,
+                        warning.type);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                    Console.WriteLine("{0}\n", warning.warning);
+
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine("Warnings: {0}", closureComplierResult.Warnings.Count);
+            }
+            else
+            {
+                Console.WriteLine("No warnings");
+            }
+            
             Console.ReadKey();
         }
     }

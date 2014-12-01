@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function Unit(name){
   this.name = name;
   this.hp = 100;    

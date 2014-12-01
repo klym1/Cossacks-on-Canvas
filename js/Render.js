@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function Render (world) {
 	
 	var initRunTime = new Date();

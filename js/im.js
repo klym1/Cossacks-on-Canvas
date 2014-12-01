@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function IM(render, loading_completed_callback, update_callback){
             this.store =  render._resources;
             this.imagesAdded = 0;

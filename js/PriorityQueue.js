@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * @constructor
+ */
 function PriorityQueue(criteria) {
     this.criteria = criteria;
     this.length = 0;
