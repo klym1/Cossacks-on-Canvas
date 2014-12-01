@@ -22,7 +22,7 @@ namespace ConvertAll
             {
                 if (args[0] == "--d")
                 {
-                    IsDebug = true;
+                  //  IsDebug = true;
                 }
                 else
                 {
@@ -31,7 +31,7 @@ namespace ConvertAll
             }
 
             var bitmapSaver = new BitmapSaver(SpritesDirectory);
-            var bitmapProcessor = new BitmapProcessor(BaseDirectory);
+            var bitmapProcessor = new BitmapProcessor(BaseDirectory, IsDebug);
             var mdParser = new MdFileParser(Path.Combine(MDDirectory, unit + ".md"));
             
             var userLCs = mdParser.FindUserLCShadow();

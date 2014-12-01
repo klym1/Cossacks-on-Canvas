@@ -31,6 +31,32 @@ function Render (world) {
 		document.getElementById("loading-container").innerHTML += "[" + minutes + ":" + seconds + "." + milliseconds+ "] " + string + "<p>";
 	}
 
+	this.mouseDownHandler = function(e){
+
+		var offsetX = e.offsetX;
+		var offsetY = e.offsetY;
+
+		for (var i = 0; i < this.world.units.length; i++) {
+
+			var unit = this.world.units[i];
+  		
+			var actualUnitHalfWidth = 20;
+			var actualUnitHalfHeight = 30;
+
+  			unit.IsSelected = unit.x + unit.State.xSymmetry - actualUnitHalfWidth < offsetX 
+  							&& unit.x + unit.State.xSymmetry + actualUnitHalfWidth > offsetX
+  							&& unit.y + unit.State.ySymmetry - actualUnitHalfHeight < offsetY
+  							&& unit.y + unit.State.ySymmetry + actualUnitHalfHeight > offsetY
+  				 
+  		};
+
+		document.getElementById("world-info").innerHTML = "mousedown";
+	}
+
+	this.mouseUpHandler = function(e){
+		document.getElementById("world-info").innerHTML = "mouseup";
+	}
+
 	this.init = function() {
 
 		var canvas_height = 500;
@@ -41,7 +67,12 @@ function Render (world) {
 		this.canvas = document.getElementById("can");
 		this.canvas.width = canvas_width;
 		this.canvas.height = canvas_height;
-		
+
+	
+		this.canvas.addEventListener("mousedown", this.mouseUpHandler.bind(this));
+		this.canvas.addEventListener("mouseup", this.mouseDownHandler.bind(this));
+		this.canvas.addEventListener("contextMenu", function(){return false;});
+
  		this.canvas_height = this.canvas.height;
 	  	this.canvas_width = this.canvas.width;
 
@@ -83,17 +114,30 @@ function Render (world) {
 
 			var image = this._resources[state.spriteName];
 
+			if(unit.IsSelected === true){
+					this.drawEllipseWithEllipse(this.ctx, unit.x + state.xSymmetry, unit.y + state.ySymmetry, 25, 10 );
+			}
+
 			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
-		//	this.ctx.rect(unit.x, unit.y, 2, 2);
-			this.ctx.stroke();
 		}
 	};
+
+	this.drawEllipseWithEllipse = function (ctx, cx, cy, rx, ry) {
+        if(ctx.ellipse)
+        {
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2);
+          ctx.strokeStyle = '#0000ff';
+          ctx.stroke();
+          ctx.lineWidth = 3;
+        }
+      };
 
 	this.WriteStatusInfo = function(world)
 	{
 		if(SHOW_DEBUG_INFO === true)
 		{
-			document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
+		//	document.getElementById("world-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world));
 			document.getElementById("unit-info").innerHTML = this.MaterializeStatusData(this.GetInfoRecursively(world.units[0].commandsQueue));
 		} else {
 			document.getElementById("world-info").innerHTML = null;

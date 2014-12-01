@@ -3,7 +3,7 @@
 /**
  * @constructor
  */
-function UnitState(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry){
+function UnitState(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry, ySymmetry){
   this.spriteName = spriteName;
 
   this.spriteWidth = spriteWidth;
@@ -14,6 +14,7 @@ function UnitState(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry){
 
   this.Id = id;
   this.xSymmetry = xSymmetry;
+  this.ySymmetry = ySymmetry;
 }
 
 UnitState.prototype.toString = function()

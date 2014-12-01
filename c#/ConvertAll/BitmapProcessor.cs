@@ -10,10 +10,12 @@ namespace ConvertAll
     internal class BitmapProcessor
     {
         private string BaseDirectory { get; set; }
+        private readonly bool _isDebug;
 
-        public BitmapProcessor(string baseDirectory)
+        public BitmapProcessor(string baseDirectory, bool isDebug)
         {
             BaseDirectory = baseDirectory;
+            _isDebug = isDebug;
         }
 
         public SpriteGrid RunAllSteps(string[] userLC)
@@ -27,12 +29,14 @@ namespace ConvertAll
         {
             var id = Int32.Parse(userLC[1]);
             var spriteName = userLC[2].ToUpperInvariant();
-            var mirrorOffset = Int32.Parse(userLC[4]) * (-1);
+            var mirrorOffsetX = Int32.Parse(userLC[4]) * (-1);
+            var mirrorOffsetY = Int32.Parse(userLC[5]) * (-1);
 
             var sprite = new Sprite
             {
                 Id = id,
-                MirrorOffset = mirrorOffset,
+                MirrorOffsetX = mirrorOffsetX,
+                MirrorOffsetY = mirrorOffsetY,
                 Name = spriteName,
                 Bitmaps = Verify.JoinAllImagesAndAlphasFromDirectory(spriteName, BaseDirectory)
             };
@@ -45,14 +49,15 @@ namespace ConvertAll
             var c = resultArrayOfJoinedBitmap.Bitmaps.Select(it => new B { Content = it }).ToArray();
 
             var maxHeight = c.Max(it => it.Content.Height);
-            var maxWidth = resultArrayOfJoinedBitmap.MirrorOffset * 2;
+            var maxWidth = resultArrayOfJoinedBitmap.MirrorOffsetX * 2;
 
-            var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, resultArrayOfJoinedBitmap.MirrorOffset);
+            var bitmap = CreateSpriteBitmap(c, maxHeight, maxWidth, resultArrayOfJoinedBitmap.MirrorOffsetX, resultArrayOfJoinedBitmap.MirrorOffsetY);
 
             var spriteInfo = new SpriteGrid
             {
                 Id = resultArrayOfJoinedBitmap.Id,
-                XSymmetry = resultArrayOfJoinedBitmap.MirrorOffset,
+                XSymmetry = resultArrayOfJoinedBitmap.MirrorOffsetX,
+                YSymmetry = resultArrayOfJoinedBitmap.MirrorOffsetY,
                 GridBitmap = bitmap,
                 UnitName = resultArrayOfJoinedBitmap.Name,
                 SpriteHeight = maxHeight,
@@ -64,7 +69,7 @@ namespace ConvertAll
             return spriteInfo;
         }
 
-        private static Bitmap CreateSpriteBitmap(B[] c, int maxHeight, int maxWidth, int jjj)
+        private Bitmap CreateSpriteBitmap(B[] c, int maxHeight, int maxWidth, int mirrorOffsetX, int mirrorOffsetY)
         {
             var newimage = new Bitmap(maxWidth * 16, maxHeight * (c.Length / 9));
 
@@ -75,14 +80,27 @@ namespace ConvertAll
                 for (int i = z, j = 0; i < c.Length; i += 9, j++)
                 {
                     graphics.DrawImage(c[i].Content, z * maxWidth, maxHeight * j);
+                    
+                    if (_isDebug)
+                    {
+                        var pen = new Pen(Color.Red);
 
-                    var pen = new Pen(Color.Red);
+                        graphics.DrawLine(pen, 
+                            z * maxWidth + mirrorOffsetX, 
+                            maxHeight * j, 
+                            z * maxWidth + mirrorOffsetX, 
+                            maxHeight * (j + 1));
 
-                    graphics.DrawLine(pen, z * maxWidth + jjj, maxHeight * j, z * maxWidth + jjj, maxHeight * (j+1));
+                        graphics.DrawLine(pen,
+                            z*maxWidth,
+                            maxHeight*j + mirrorOffsetY,
+                            (z + 1)*maxWidth,
+                            maxHeight*j + mirrorOffsetY);
+                    }
 
                     if (z > 0 && z < 8)
                     {
-                        DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, jjj);
+                        DrawFlippedImage(c[i], maxWidth, maxHeight, graphics, z, j, mirrorOffsetX, mirrorOffsetY);
                     }
                 }
             }
@@ -92,17 +110,28 @@ namespace ConvertAll
             return newimage;
         }
 
-        private static void DrawFlippedImage(B c, int maxWidth, int maxHeight, Graphics graphics, int z, int j, int jjj)
+        private void DrawFlippedImage(B c, int maxWidth, int maxHeight, Graphics graphics, int z, int j, int xSymmetryPoint, int mirrorOffsetY)
         {
-            var xSymmetryPoint = jjj;
-
             c.Content = TranslateAllPixelsToRight(c.Content, maxWidth, maxHeight, xSymmetryPoint);
 
             graphics.DrawImage(c.Content, (-z + 16) * maxWidth, maxHeight * j);
+            
+            if (_isDebug)
+            {
+                var pen = new Pen(Color.Red);
 
-            var pen = new Pen(Color.Red);
-
-            graphics.DrawLine(pen, (-z + 16) * maxWidth + xSymmetryPoint, maxHeight * j, (-z + 16) * maxWidth + xSymmetryPoint, maxHeight * (j + 1));
+                graphics.DrawLine(pen, 
+                    (-z + 16) * maxWidth + xSymmetryPoint, 
+                    maxHeight * j, 
+                    (-z + 16) * maxWidth + xSymmetryPoint, 
+                    maxHeight * (j + 1));
+                
+                graphics.DrawLine(pen,
+                    (-z + 16)*maxWidth,
+                    maxHeight*j + mirrorOffsetY,
+                    (-z + 17)*maxWidth,
+                    maxHeight*j + mirrorOffsetY);
+            }
         }
 
         static Bitmap TranslateAllPixelsToRight(Bitmap image, int maxmwidth, int maxHeight, int jjj)

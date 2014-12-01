@@ -16,6 +16,7 @@ function Unit(name){
    
   this.commandHandler = new CommandHandler(this);
   this.State = {};
+  this.IsSelected = false;
 }
 
 Unit.prototype.tick = function(){
@@ -76,7 +77,7 @@ Unit.prototype.Rotate = function(){
 
 Unit.prototype.go = function(N, priority){
 
-	var stepsNumber = 100;
+	var stepsNumber = 30;
 
 	var command = new Command({
 		commandHandler : this.commandHandler,

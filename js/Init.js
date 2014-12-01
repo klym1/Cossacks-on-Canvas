@@ -21,7 +21,8 @@ var world = (function () {
             sprites[i].SpriteWidth, 
             sprites[i].NumberOfFrames,
             sprites[i].Id,
-            sprites[i].XSymmetry);
+            sprites[i].XSymmetry,
+            sprites[i].YSymmetry);
 
         grenadier.states.push(unit_state);
     }   

@@ -16,5 +16,6 @@ namespace ConvertAll
         public Bitmap GridBitmap { get; set; }
 
         public int XSymmetry { get; set; }
+        public int YSymmetry { get; set; }
     }
 }

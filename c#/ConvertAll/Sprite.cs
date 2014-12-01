@@ -7,7 +7,8 @@ namespace ConvertAll
     {
         public string Name { get; set; }
         public IList<Bitmap> Bitmaps { get; set; }
-        public int MirrorOffset { get; set; }
         public int Id { get; set; }
+        public int MirrorOffsetX { get; set; }
+        public int MirrorOffsetY { get; set; }
     }
 }
