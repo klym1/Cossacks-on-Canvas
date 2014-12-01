@@ -3,6 +3,13 @@
 /**
  * @constructor
  */
+
+function handler(e){
+	document.getElementById("world-info").innerHTML = "mouseup"
+}
+
+window.addEventListener('mouseup', handler, false);
+
 function Render (world) {
 	
 	var initRunTime = new Date();
@@ -39,8 +46,14 @@ function Render (world) {
 		var offsetX = e.offsetX;
 		var offsetY = e.offsetY;
 
+		//document.getElementById("can").addEventListener('mousemove', window.handler, false);
+
+		//document.getElementById("can").removeEventListener('mouseup', window.handler, true);
+	
+
 		if(e.button == 2){
 			this.HandleMouseLeftClick.bind(this)(e);
+			window.removeEventListener('mouseup', handler, false);
 		}
 
 		for (var i = 0; i < this.world.units.length; i++) {
@@ -66,12 +79,24 @@ function Render (world) {
 		this.canvasOffsetY = (this.world.height - this.canvas_height) / 2;
 	}
 
+	this.MoveCanvasToRight = function(){
+		this.canvasOffsetX += 50;
+	}
+
+	this.MoveCanvasToLeft = function(){
+		this.canvasOffsetX -= 50;
+	}
+
 	this.HandleMouseLeftClick = function(e){
 		var unitHandler = new UnitHandler(this.world.units[0]);
 		unitHandler.Go(12,23);
 	}
 
 	this.mouseUpHandler = function(e){
+
+		//document.getElementById("can").addEventListener('mousemove', window.handler, false);
+		//document.getElementById("can").removeEventListener('mouseup', window.handler, true);
+
 		document.getElementById("world-info").innerHTML = "mouseup";
 	}
 
@@ -86,9 +111,9 @@ function Render (world) {
 		this.canvas.width = canvas_width;
 		this.canvas.height = canvas_height;
 	
-		this.canvas.addEventListener("mousedown", this.mouseUpHandler.bind(this));
-		this.canvas.addEventListener("mouseup", this.mouseDownHandler.bind(this));
-		
+		document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
+		//document.getElementById("can").addEventListener("mouseup", window.handler);
+				
  		this.canvas_height = this.canvas.height;
 	  	this.canvas_width = this.canvas.width;
 
@@ -109,6 +134,14 @@ function Render (world) {
 		}
 	}
 	
+	this.ToCanvasX = function(x){
+		return x - this.canvasOffsetX;
+	}
+
+	this.ToCanvasY = function(y){
+		return y - this.canvasOffsetY;
+	}
+
   	this.RenderUnits = function() 
   	{
   		this.WriteStatusInfo(this.world);
@@ -131,10 +164,10 @@ function Render (world) {
 			var image = this._resources[state.spriteName];
 
 			if(unit.IsSelected === true){
-					this.drawEllipseWithEllipse(this.ctx, unit.x + state.xSymmetry, unit.y + state.ySymmetry, 25, 10 );
+					this.drawEllipseWithEllipse(this.ctx, this.ToCanvasX(unit.x + state.xSymmetry), this.ToCanvasY(unit.y + state.ySymmetry), 25, 10 );
 			}
 
-			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, unit.x, unit.y, spriteWidth, spriteHeight);
+			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, this.ToCanvasX(unit.x), this.ToCanvasY(unit.y), spriteWidth, spriteHeight);
 		}
 	};
 

@@ -4,12 +4,12 @@ var SHOW_DEBUG_INFO = true;
 
 var world = (function () {
     
-    var world = new World(5000, 5000);
+    var world = new World(1000, 500);
 
     var grenadier = new Unit("Grenadier");
 
-    grenadier.x = 500;
-    grenadier.y = 100;
+    grenadier.x = world.width/2;
+    grenadier.y = world.height/2;
 
     world.units.push(grenadier); 
 

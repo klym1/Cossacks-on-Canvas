@@ -40,6 +40,10 @@
         font-size: 11px;
         font-family: Verdana;
     }
+
+    #can {
+       border: 1px dashed black;
+    }
     </style>
     <body  oncontextmenu="return false;">
         <div id="coinTapGameContainer">
@@ -82,5 +86,8 @@
         unit.go(15);
 
         " >Start</BUTTON>
+
+        <BUTTON onclick="render.MoveCanvasToRight()" >-></BUTTON>
+        <BUTTON onclick="render.MoveCanvasToLeft()" >-<</BUTTON>
     </body>
 </html>
