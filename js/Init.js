@@ -37,4 +37,6 @@ world.Run();
 var render = new Render(world);
     render.init();
 
+    render.CenterView();
+
 var unit = world.units[0];

@@ -8,6 +8,9 @@ function Render (world) {
 	var initRunTime = new Date();
 	this._resources = {};
 	this.world = world;
+	this.canvasOffsetX = 0;
+	this.canvasOffsetY = 0;
+
 	this.gameLoop = function () {
 
 		var self = this;
@@ -57,8 +60,13 @@ function Render (world) {
 		document.getElementById("world-info").innerHTML = "mousedown";
 	}
 
-	this.HandleMouseLeftClick = function(e){
+	this.CenterView = function(){
+		
+		this.canvasOffsetX = (this.world.width - this.canvas_width) / 2;
+		this.canvasOffsetY = (this.world.height - this.canvas_height) / 2;
+	}
 
+	this.HandleMouseLeftClick = function(e){
 		var unitHandler = new UnitHandler(this.world.units[0]);
 		unitHandler.Go(12,23);
 	}
