@@ -1,5 +1,13 @@
 "use strict";
 
+define(function(){
+  return{
+    CreateNewWorld : function(width, height){
+      return new World(width, height);
+    }
+  }
+})
+
 /**
  * @constructor
  */

@@ -1,5 +1,13 @@
 "use strict";
 
+define(["CommandHandler"] , function(){
+	return {
+		CreateCommand : function(o){
+			return new Command(o); 
+		}
+	}
+})
+
 /**
  * @constructor
  */

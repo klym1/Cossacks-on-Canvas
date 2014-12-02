@@ -1,3 +1,13 @@
+"use strict";
+
+define(function(){
+	return{
+		CreateHandler : function(unit){
+			return new UnitHandler(unit);
+		}
+	}
+})
+
 /**
  * @constructor
  */

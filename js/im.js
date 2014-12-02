@@ -1,5 +1,14 @@
 "use strict";
 
+define(function(){
+    return {
+        SetUp : function(render, loading_completed_callback, update_callback){
+            return new IM(render, loading_completed_callback, update_callback);
+        }
+    }
+})
+
+
 /**
  * @constructor
  */

@@ -15,10 +15,9 @@ require.config({
 
 var World;
 
-require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitState", "Render", "MinimapRender", "IM"], function(a, b, c, d, unitModule, f, g, h, i) {
+require(["World", "Unit", "UnitState", "Render", "MinimapRender"], function(worldModule, unitModule, unitStateModule, renderModule, minimapRenderModule) {
    
-    var world = new World(WORLD_WIDTH, WORLD_HEIGHT);
-
+    var world = worldModule.CreateNewWorld(WORLD_WIDTH, WORLD_HEIGHT);
     var grenadier = unitModule.createUnit("Grenadier");
 
     grenadier.x = world.width / 2;
@@ -28,7 +27,7 @@ require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitSta
 
     for(var i = 0; i < sprites.length; i++){
         
-        var unit_state = new UnitState(
+        var unit_state = unitStateModule.CreateUnitState(
             sprites[i].UnitName, 
             sprites[i].SpriteHeight, 
             sprites[i].SpriteWidth, 
@@ -44,7 +43,7 @@ require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitSta
 
     world.Run();
 
-    window.render = new Render({
+    window.render = renderModule.CreateRender({
         world : world,
         height : GAME_WINDOW_HEIGHT,
         width : GAME_WINDOW_WIDTH
@@ -52,7 +51,7 @@ require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitSta
     
     window.render.init();
 
-    var minimapRender = new MinimapRender({
+    var minimapRender = minimapRenderModule.CreateRender ({
         render : render,
         world : world,
         height : MINIMAP_HEIGHT

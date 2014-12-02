@@ -1,5 +1,13 @@
 "use strict";
 
+define(function(){
+	return {
+		CreateRender : function(o){
+			return new MinimapRender(o);
+		}
+	}
+})
+
 /*
 *@constructor()
 */

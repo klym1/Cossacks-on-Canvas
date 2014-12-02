@@ -1,5 +1,13 @@
 "use strict";
 
+define(function(){
+	return{
+		CreateUnitState : function(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry, ySymmetry){
+			return new UnitState(spriteName, spriteHeight, spriteWidth, k, id, xSymmetry, ySymmetry);
+		}
+	}
+})
+
 /**
  * @constructor
  */

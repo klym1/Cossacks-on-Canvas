@@ -1,11 +1,22 @@
 "use strict";
 
+define(["PriorityQueue"], function(priorityQueueModule){
+
+	var queue = priorityQueueModule.CreatePriorityQueue("priority");
+
+	return {
+		CreateCommandHandler : function(unit){
+			return new CommandHandler(unit, queue);
+		}
+	}
+})
+
 /**
  * @constructor
  */
-function CommandHandler(unit){
+function CommandHandler(unit, queue){
 	this.unit = unit;
-    this.commandsQueue = new PriorityQueue("priority");
+    this.commandsQueue = queue;
 	this.HighPriorityInterruption = false;
 	this.commandIsExecuting = false;
   	this.currentCommand = null;

@@ -1,5 +1,13 @@
 "use strict";
 
+define(function(){
+    return {
+        CreatePriorityQueue : function(criteria){
+            return new PriorityQueue(criteria);
+        }
+    }
+})
+
 /**
  * @constructor
  */

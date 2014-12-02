@@ -10,12 +10,21 @@ function handler(e){
 
 window.addEventListener('mouseup', handler, false);
 
-function Render (o) {
+define(["Im", "UnitHandler"], function(ImModule, unitHandlerModule){
+	return {
+		CreateRender : function(o){
+			return new Render(o, ImModule, unitHandlerModule);
+		}
+	}
+})
+
+function Render (o, ImModule, unitHandlerModule) {
 	
 	var initRunTime = new Date();
 	this._resources = {};
 
 	this.world = o.world;
+	this.unitHandlerModule = unitHandlerModule;
 
 	this.canvas_height = o.height;
 	this.canvas_width = o.width;
@@ -106,7 +115,10 @@ function Render (o) {
 	}
 
 	this.HandleMouseLeftClick = function(e){
-		var unitHandler = new UnitHandler(this.world.units[0]);
+
+		var unitHandler = this.unitHandlerModule.CreateHandler(this.unit);
+
+		//var unitHandler = new UnitHandler(this.world.units[0]);
 		unitHandler.Go(12,23);
 	}
 
@@ -123,9 +135,9 @@ function Render (o) {
 		var self = this;
 		
 		//document.getElementById("can").addEventListener("mouseup", window.handler);
-		//document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
+		document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
  		 		
-		var imageLoader = new IM(this, function(){ 
+		var imageLoader = ImModule.SetUp(this, function(){ 
 			
 			self.uppendLine("Loading finished in ");
 
