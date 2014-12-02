@@ -1,0 +1,113 @@
+<html>
+    <style type="text/css">
+
+    *{
+        margin:0
+        padding:0;
+    }
+
+    #buttons {
+        width: 300px;
+        margin: 20 auto;
+    }
+
+    #GameContainer {
+        
+        width: 1250px;
+        margin: 0 auto;
+        padding: 10px;
+        border: 1px solid blue;
+        
+    }
+
+    #fieldContainer {
+        width: 810px; 
+        display: table-cell; 
+        vertical-align: bottom;
+    }    
+
+    #minimapContainer {
+        display: table-cell;
+        height: 500px;
+        vertical-align: bottom;
+        
+    }
+
+    #loading-container {
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        font-size: 11px;
+        font-family: Verdana;
+    }
+
+     #world-info {
+        position: absolute;
+        left: 200px;
+        top: 20px;
+        font-size: 11px;
+        font-family: Verdana;
+    }
+
+    #unit-info {
+        position: absolute;
+        left: 400px;
+        top: 20px;
+        font-size: 11px;
+        font-family: Verdana;
+    }
+
+    #can {
+       border: 1px dashed black;
+    }
+
+    #minimap {
+       border: 1px solid black;
+    }
+    </style>
+    <body  oncontextmenu="return false;">
+        <div id="GameContainer">
+            <div id = "fieldContainer">
+                <canvas id="can" />
+            </div>
+            <div id = "minimapContainer">
+                <canvas id="minimap" />
+            </div>
+            <div style="clear:both"></div>
+            <div id = "buttons">
+                <BUTTON onclick="
+        unit.go(0);
+        unit.go(1);
+        unit.go(2);
+        unit.go(3);
+        unit.go(4);
+        unit.go(5);
+        unit.go(6);
+        unit.go(7);
+        unit.go(8);
+        unit.go(9);
+        unit.go(10);
+        unit.go(11);
+        unit.go(12);
+        unit.go(13);
+        unit.go(14);
+        unit.go(15);
+
+        " >Start</BUTTON>
+
+        <BUTTON onclick="render.MoveCanvasToRight()" >Right</BUTTON>
+        <BUTTON onclick="render.MoveCanvasToLeft()" >Left</BUTTON>
+        <BUTTON onclick="render.MoveCanvasToDown()" >Down</BUTTON>
+        <BUTTON onclick="render.MoveCanvasToUp()" >Up</BUTTON>
+            </div>
+        </div>
+        
+        <h1 id = "loading-container"></h1>
+        <h1 id = "world-info"></h1>
+        <h1 id = "unit-info"></h1>
+
+        <script src="sprites_png\sprites-info.json"></script>
+        <script src="http://requirejs.org/docs/release/2.1.15/minified/require.js"></script>
+        <script src="build.js"></script>
+    </body>
+</html>
