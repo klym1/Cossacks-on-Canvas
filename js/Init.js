@@ -15,11 +15,11 @@ require.config({
 
 var World;
 
-require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitState", "Render", "MinimapRender", "IM"], function(util) {
+require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitState", "Render", "MinimapRender", "IM"], function(a, b, c, d, unitModule, f, g, h, i) {
    
     var world = new World(WORLD_WIDTH, WORLD_HEIGHT);
 
-    var grenadier = new Unit("Grenadier");
+    var grenadier = unitModule.createUnit("Grenadier");
 
     grenadier.x = world.width / 2;
     grenadier.y = world.height / 2;

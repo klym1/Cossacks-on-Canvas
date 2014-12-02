@@ -1,5 +1,13 @@
 "use strict";
 
+define(function(){
+	return {
+		createUnit : function(name){
+			return new Unit(name);
+		}
+	}
+})
+
 /**
  * @constructor
  */
