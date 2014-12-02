@@ -87,6 +87,14 @@ function Render (world) {
 		this.canvasOffsetX -= 50;
 	}
 
+	this.MoveCanvasToUp = function(){
+		this.canvasOffsetY -= 50;
+	}
+
+	this.MoveCanvasToDown = function(){
+		this.canvasOffsetY += 50;
+	}
+
 	this.HandleMouseLeftClick = function(e){
 		var unitHandler = new UnitHandler(this.world.units[0]);
 		unitHandler.Go(12,23);
@@ -114,10 +122,11 @@ function Render (world) {
 		document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
 		//document.getElementById("can").addEventListener("mouseup", window.handler);
 				
- 		this.canvas_height = this.canvas.height;
+		this.canvas_height = this.canvas.height;
 	  	this.canvas_width = this.canvas.width;
 
  		this.ctx = this.canvas.getContext("2d");
+ 		
 
 		var imageLoader = new IM(this, function(){ 
 			

@@ -1,20 +1,36 @@
 <html>
     <style type="text/css">
 
-    #coinTapGameContainer {
-        width: 1024px;
-        height: auto;
-        margin: 0 auto;
-        padding-top: 0px;
-        -webkit-user-select: none;  
-        -moz-user-select: none;    
-        -ms-user-select: none;      
-        user-select: none;
+    *{
+        margin:0
+        padding:0;
     }
 
-    #coinTapGameContainer canvas {
-        margin: 0;
-        padding: 0;  
+    #buttons {
+        width: 200px;
+        margin: 20 auto;
+    }
+
+    #GameContainer {
+        
+        width: 1250px;
+        margin: 0 auto;
+        padding: 10px;
+        border: 1px solid blue;
+        
+    }
+
+    #fieldContainer {
+        width: 810px; 
+        display: table-cell; 
+        vertical-align: bottom;
+    }    
+
+    #minimapContainer {
+        display: table-cell;
+        height: 500px;
+        vertical-align: bottom;
+        
     }
 
     #loading-container {
@@ -44,30 +60,22 @@
     #can {
        border: 1px dashed black;
     }
+
+    #minimap {
+       border: 1px solid black;
+    }
     </style>
     <body  oncontextmenu="return false;">
-        <div id="coinTapGameContainer">
-            <canvas id="can"></canvas>
-        </div>
-        <h1 id = "loading-container"></h1>
-        <h1 id = "world-info"></h1>
-        <h1 id = "unit-info"></h1>
-
-        <script src="sprites_png\sprites-info.json"></script>
-        <script src="sprites_png\transitions.json"></script>
-        <script src="js\im.js"></script>
-        <script src="js\World.js"></script>
-        <script src="js\Command.js"></script>
-        <script src="js\CommandHandler.js"></script>
-        <script src="js\Unit.js"></script>
-        <script src="js\UnitState.js"></script>
-        <script src="js\UnitHandler.js"></script>
-        <script src="js\PriorityQueue.js"></script>
-        <script src="js\animationLoop.js"></script>
-        <script src="js\Render.js"></script>
-        <script src="js\Init.js"></script>
-
-        <BUTTON onclick="
+        <div id="GameContainer">
+            <div id = "fieldContainer">
+                <canvas id="can" />
+            </div>
+            <div id = "minimapContainer">
+                <canvas id="minimap" />
+            </div>
+            <div style="clear:both"></div>
+            <div id = "buttons">
+                <BUTTON onclick="
         unit.go(0);
         unit.go(1);
         unit.go(2);
@@ -89,5 +97,29 @@
 
         <BUTTON onclick="render.MoveCanvasToRight()" >-></BUTTON>
         <BUTTON onclick="render.MoveCanvasToLeft()" >-<</BUTTON>
+        <BUTTON onclick="render.MoveCanvasToDown()" >Down</BUTTON>
+        <BUTTON onclick="render.MoveCanvasToUp()" >Up</BUTTON>
+            </div>
+        </div>
+        
+        
+        <h1 id = "loading-container"></h1>
+        <h1 id = "world-info"></h1>
+        <h1 id = "unit-info"></h1>
+
+        <script src="sprites_png\sprites-info.json"></script>
+        <script src="sprites_png\transitions.json"></script>
+        <script src="js\im.js"></script>
+        <script src="js\World.js"></script>
+        <script src="js\Command.js"></script>
+        <script src="js\CommandHandler.js"></script>
+        <script src="js\Unit.js"></script>
+        <script src="js\UnitState.js"></script>
+        <script src="js\UnitHandler.js"></script>
+        <script src="js\PriorityQueue.js"></script>
+        <script src="js\animationLoop.js"></script>
+        <script src="js\Render.js"></script>
+        <script src="js\MinimapRender.js"></script>
+        <script src="js\Init.js"></script>
     </body>
 </html>

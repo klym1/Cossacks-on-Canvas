@@ -4,7 +4,7 @@ var SHOW_DEBUG_INFO = true;
 
 var world = (function () {
     
-    var world = new World(1000, 500);
+    var world = new World(1000, 1000);
 
     var grenadier = new Unit("Grenadier");
 
@@ -37,6 +37,14 @@ world.Run();
 var render = new Render(world);
     render.init();
 
-    render.CenterView();
+var minimapRender = new MinimapRender({
+    render : render,
+    world : world,
+    height : 150
+});
+
+minimapRender.init();
+
+render.CenterView();
 
 var unit = world.units[0];
