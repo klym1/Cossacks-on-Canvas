@@ -1,15 +1,22 @@
 "use strict";
 
 var SHOW_DEBUG_INFO = true;
+var MINIMAP_HEIGHT = 150; // width is calculated automatically (to have ratio same as the world has)
+
+var WORLD_WIDTH = 1000;
+var WORLD_HEIGHT = 500;
+
+var GAME_WINDOW_WIDTH = 800;
+var GAME_WINDOW_HEIGHT = 500;
 
 var world = (function () {
     
-    var world = new World(1000, 1000);
+    var world = new World(WORLD_WIDTH, WORLD_HEIGHT);
 
     var grenadier = new Unit("Grenadier");
 
-    grenadier.x = world.width/2;
-    grenadier.y = world.height/2;
+    grenadier.x = world.width / 2;
+    grenadier.y = world.height / 2;
 
     world.units.push(grenadier); 
 
@@ -34,13 +41,17 @@ var world = (function () {
 
 world.Run();
 
-var render = new Render(world);
+var render = new Render({
+    world : world,
+    height : GAME_WINDOW_HEIGHT,
+    width : GAME_WINDOW_WIDTH
+});
     render.init();
 
 var minimapRender = new MinimapRender({
     render : render,
     world : world,
-    height : 150
+    height : MINIMAP_HEIGHT
 });
 
 minimapRender.init();

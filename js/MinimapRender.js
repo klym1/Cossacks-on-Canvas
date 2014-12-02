@@ -16,7 +16,7 @@ MinimapRender.prototype.gameLoop = function(){
 
 	var binded = self.gameLoop.bind(self);
 
-	setTimeout(binded, 10);
+	setTimeout(binded, 100);
 	self.Render();	
 }
 
@@ -71,6 +71,6 @@ MinimapRender.prototype.DrawFrame = function(){
 	this.minimapctx.beginPath();
 
 	this.minimapctx.strokeStyle = "blue";
-	this.minimapctx.rect(miniMapRectX,miniMapRectY,miniMapRectWidth,miniMapRectHeight);
+	this.minimapctx.rect(miniMapRectX, miniMapRectY, miniMapRectWidth, miniMapRectHeight);
 	this.minimapctx.stroke();
 }

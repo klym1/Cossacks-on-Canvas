@@ -10,14 +10,24 @@ function handler(e){
 
 window.addEventListener('mouseup', handler, false);
 
-function Render (world) {
+function Render (o) {
 	
 	var initRunTime = new Date();
 	this._resources = {};
-	this.world = world;
-	this.canvasOffsetX = 0;
-	this.canvasOffsetY = 0;
 
+	this.world = o.world;
+
+	this.canvas_height = o.height;
+	this.canvas_width = o.width;
+
+	this.canvasOffsetX = 0;
+	this.canvasOffsetY = 0;	
+
+	this.canvas = document.getElementById("can");
+	this.canvas.width = this.canvas_width;
+	this.canvas.height = this.canvas_height;
+	this.ctx = this.canvas.getContext("2d");
+	
 	this.gameLoop = function () {
 
 		var self = this;
@@ -110,24 +120,11 @@ function Render (world) {
 
 	this.init = function() {
 
-		var canvas_height = 500;
-		var canvas_width = 800;
-		
 		var self = this;
-
-		this.canvas = document.getElementById("can");
-		this.canvas.width = canvas_width;
-		this.canvas.height = canvas_height;
-	
-		document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
+		
 		//document.getElementById("can").addEventListener("mouseup", window.handler);
-				
-		this.canvas_height = this.canvas.height;
-	  	this.canvas_width = this.canvas.width;
-
- 		this.ctx = this.canvas.getContext("2d");
- 		
-
+		//document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
+ 		 		
 		var imageLoader = new IM(this, function(){ 
 			
 			self.uppendLine("Loading finished in ");
