@@ -9,8 +9,14 @@ var WORLD_HEIGHT = 500;
 var GAME_WINDOW_WIDTH = 800;
 var GAME_WINDOW_HEIGHT = 500;
 
-var world = (function () {
-    
+require.config({
+    baseUrl: 'js'
+});
+
+var World;
+
+require(["World", "Command", "CommandHandler", "PriorityQueue", "Unit", "UnitState", "Render", "MinimapRender", "IM"], function(util) {
+   
     var world = new World(WORLD_WIDTH, WORLD_HEIGHT);
 
     var grenadier = new Unit("Grenadier");
@@ -33,29 +39,30 @@ var world = (function () {
 
         grenadier.states.push(unit_state);
     }   
+
+    grenadier.SetState(3);      
+
+    world.Run();
+
+    window.render = new Render({
+        world : world,
+        height : GAME_WINDOW_HEIGHT,
+        width : GAME_WINDOW_WIDTH
+    });
     
-    grenadier.SetState(3);
+    window.render.init();
 
-    return world;
-} ());
+    var minimapRender = new MinimapRender({
+        render : render,
+        world : world,
+        height : MINIMAP_HEIGHT
+    });
 
-world.Run();
+    minimapRender.init();
 
-var render = new Render({
-    world : world,
-    height : GAME_WINDOW_HEIGHT,
-    width : GAME_WINDOW_WIDTH
-});
-    render.init();
+    render.CenterView();
 
-var minimapRender = new MinimapRender({
-    render : render,
-    world : world,
-    height : MINIMAP_HEIGHT
+    window.unit = world.units[0];
 });
 
-minimapRender.init();
 
-render.CenterView();
-
-var unit = world.units[0];
