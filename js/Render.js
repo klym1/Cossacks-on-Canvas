@@ -60,6 +60,22 @@ function Render (o, ImModule, unitHandlerModule) {
 		document.getElementById("loading-container").innerHTML += "[" + minutes + ":" + seconds + "." + milliseconds+ "] " + string + "<p>";
 	}
 
+	this.keyboardHandler = function(e){
+
+		var key = e.keyCode;
+
+		//left
+		if(key == 37) {
+			unit.n--;
+		}
+
+		//right
+		if(key == 39) {
+			unit.n++;
+		}
+
+	}
+
 	this.mouseDownHandler = function(e){
 
 		var offsetX = e.offsetX;
@@ -136,6 +152,7 @@ function Render (o, ImModule, unitHandlerModule) {
 		
 		//document.getElementById("can").addEventListener("mouseup", window.handler);
 		document.getElementById("can").addEventListener("mousedown", this.mouseDownHandler.bind(this));
+		window.addEventListener("keydown", this.keyboardHandler.bind(this));
  		 		
 		var imageLoader = ImModule.SetUp(this, function(){ 
 			
@@ -181,22 +198,37 @@ function Render (o, ImModule, unitHandlerModule) {
 
 			var image = this._resources[state.spriteName];
 
-			if(unit.IsSelected === true){
-					this.drawEllipseWithEllipse(this.ctx, this.ToCanvasX(unit.x + state.xSymmetry), this.ToCanvasY(unit.y + state.ySymmetry), 25, 10 );
-			}
+		//	if(unit.IsSelected === true){
+		//			this.drawEllipseWithEllipse(this.ctx, this.ToCanvasX(unit.x + state.xSymmetry), this.ToCanvasY(unit.y + state.ySymmetry), 25, 10 );
+		//	}
 
 			this.ctx.drawImage(image, sx, sy, spriteWidth, spriteHeight, this.ToCanvasX(unit.x), this.ToCanvasY(unit.y), spriteWidth, spriteHeight);
+
+		//	this.drawRectangle(this.ctx, this.ToCanvasX(unit.x ), this.ToCanvasY(unit.y ), spriteWidth, spriteHeight );
+			this.drawRectangle(this.ctx, this.ToCanvasX(unit.x + state.xSymmetry) - 4, this.ToCanvasY(unit.y + state.ySymmetry) - 4, 8,8 );
 		}
 	};
+
+	this.drawRectangle = function (ctx, cx, cy, rx, ry) {
+       
+          ctx.beginPath();
+            ctx.lineWidth = 1;
+          ctx.rect(cx, cy, rx, ry, 0, 0, Math.PI*2);
+          ctx.strokeStyle = '#0000ff';
+          ctx.stroke();
+        
+        
+      };
 
 	this.drawEllipseWithEllipse = function (ctx, cx, cy, rx, ry) {
         if(ctx.ellipse)
         {
           ctx.beginPath();
+           ctx.lineWidth = 3;
           ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2);
           ctx.strokeStyle = '#0000ff';
           ctx.stroke();
-          ctx.lineWidth = 3;
+         
         }
       };
 
